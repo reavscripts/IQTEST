@@ -431,66 +431,130 @@
 
     <script>
         const questions = [
-			// --- PART 1: VISUAL LOGIC (8 Questions - REQUIRE IMAGES) ---
-			// NOTA: Devi avere i file immagini (logic_1.jpg, etc.) nella cartella del sito!
+			// --- PART 1: VISUAL LOGIC (8 Questions - SVG BUILT-IN) ---
 			{ 
-				text: "Which tile completes the pattern?", 
-				image: "logic_1.jpg", // Sostituisci col nome del tuo file immagine
-				options: ["A", "B", "C", "D", "E", "F"], 
-				correct: 1, // Esempio: B è la risposta giusta
+				text: "Which shape completes the sequence?", 
+				// Disegno: Un cerchio che diventa sempre più pieno
+				image: `<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+						  <circle cx="30" cy="30" r="20" stroke="black" stroke-width="3" fill="none" />
+						  <path d="M55 30 L65 30" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+						  <circle cx="90" cy="30" r="20" stroke="black" stroke-width="3" fill="none" />
+						  <path d="M90 10 A20 20 0 0 1 90 50 Z" fill="black" />
+						  <path d="M115 30 L125 30" stroke="black" stroke-width="2" marker-end="url(#arrow)" />
+						  <text x="150" y="40" font-family="Arial" font-size="40">?</text>
+						</svg>`,
+				options: ["A (Empty)", "B (Full Circle)", "C (Square)", "D (Line)", "E (Dot)", "F (Cross)"], 
+				correct: 1, // Full Circle
 				cat: "Logic" 
 			},
 			{ 
-				text: "Select the missing segment:", 
-				image: "logic_2.jpg", 
-				options: ["A", "B", "C", "D", "E", "F"], 
-				correct: 3, 
+				text: "Select the missing segment based on rotation:", 
+				// Disegno: Una linea che ruota (Su -> Destra -> Giù -> ?)
+				image: `<svg width="200" height="60" viewBox="0 0 240 60">
+						  <g transform="translate(30,30)"><line x1="0" y1="0" x2="0" y2="-20" stroke="black" stroke-width="4"/><circle cx="0" cy="0" r="22" stroke="black" fill="none"/></g>
+						  <g transform="translate(90,30)"><line x1="0" y1="0" x2="20" y2="0" stroke="black" stroke-width="4"/><circle cx="0" cy="0" r="22" stroke="black" fill="none"/></g>
+						  <g transform="translate(150,30)"><line x1="0" y1="0" x2="0" y2="20" stroke="black" stroke-width="4"/><circle cx="0" cy="0" r="22" stroke="black" fill="none"/></g>
+						  <text x="200" y="40" font-family="Arial" font-size="40">?</text>
+						</svg>`,
+				options: ["A (Up)", "B (Right)", "C (Down)", "D (Left)", "E (Center)", "F (Diagonal)"], 
+				correct: 3, // Left
 				cat: "Logic" 
 			},
 			{ 
-				text: "Identify the logical continuation:", 
-				image: "logic_3.jpg", 
-				options: ["A", "B", "C", "D", "E", "F"], 
-				correct: 0, 
+				text: "Logic Math: How many squares?", 
+				// Disegno: 1 quadrato, 2 quadrati, 3 quadrati...
+				image: `<svg width="200" height="60" viewBox="0 0 200 60">
+						  <rect x="10" y="20" width="20" height="20" stroke="black" fill="none" stroke-width="2"/>
+						  
+						  <rect x="60" y="20" width="20" height="20" stroke="black" fill="none" stroke-width="2"/>
+						  <rect x="70" y="20" width="20" height="20" stroke="black" fill="none" stroke-width="2"/>
+						  
+						  <text x="140" y="40" font-family="Arial" font-size="40">?</text>
+						</svg>`,
+				options: ["A (1)", "B (2)", "C (3)", "D (4)", "E (5)", "F (0)"], 
+				correct: 2, // 3 Squares (visual progression 1->2->3)
 				cat: "Logic" 
 			},
 			{ 
-				text: "Which grid fits the matrix?", 
-				image: "logic_4.jpg", 
-				options: ["A", "B", "C", "D", "E", "F"], 
-				correct: 5, 
+				text: "Which pattern fits the matrix?", 
+				// Disegno: Griglia matrice semplice (X O X | O X O | X O ?)
+				image: `<svg width="100" height="100" viewBox="0 0 100 100">
+						  <rect x="0" y="0" width="30" height="30" fill="#ddd"/><text x="10" y="20">X</text>
+						  <rect x="35" y="0" width="30" height="30" fill="#ddd"/><text x="45" y="20">O</text>
+						  <rect x="70" y="0" width="30" height="30" fill="#ddd"/><text x="80" y="20">X</text>
+						  
+						  <rect x="0" y="35" width="30" height="30" fill="#ddd"/><text x="10" y="55">O</text>
+						  <rect x="35" y="35" width="30" height="30" fill="#ddd"/><text x="45" y="55">X</text>
+						  <rect x="70" y="35" width="30" height="30" fill="#ddd"/><text x="80" y="55">O</text>
+						  
+						  <rect x="0" y="70" width="30" height="30" fill="#ddd"/><text x="10" y="90">X</text>
+						  <rect x="35" y="70" width="30" height="30" fill="#ddd"/><text x="45" y="90">O</text>
+						  <rect x="70" y="70" width="30" height="30" fill="white" stroke="black"/><text x="80" y="90">?</text>
+						</svg>`,
+				options: ["A (O)", "B (X)", "C (Y)", "D (Empty)", "E (Square)", "F (Triangle)"], 
+				correct: 1, // X
 				cat: "Logic" 
 			},
 			{ 
-				text: "Choose the correct geometric shape:", 
-				image: "logic_5.jpg", 
-				options: ["A", "B", "C", "D", "E", "F"], 
-				correct: 2, 
+				text: "Addition Logic: Shape 1 + Shape 2 = ?", 
+				// Disegno: | + - = +
+				image: `<svg width="200" height="60" viewBox="0 0 200 60">
+						  <line x1="20" y1="10" x2="20" y2="50" stroke="black" stroke-width="4" />
+						  <text x="50" y="40" font-size="30">+</text>
+						  <line x1="80" y1="30" x2="120" y2="30" stroke="black" stroke-width="4" />
+						  <text x="140" y="40" font-size="30">=</text>
+						  <text x="170" y="40" font-size="40">?</text>
+						</svg>`,
+				options: ["A (-)", "B (|)", "C (+)", "D (x)", "E (=)", "F (/)"], 
+				correct: 2, // + (Plus sign)
 				cat: "Logic" 
 			},
 			{ 
-				text: "Complete the visual sequence:", 
-				image: "logic_6.jpg", 
-				options: ["A", "B", "C", "D", "E", "F"], 
-				correct: 4, 
+				text: "Which fits the sequence?", 
+				// Disegno: Triangolo, Quadrato, Pentagono, ?
+				image: `<svg width="240" height="60" viewBox="0 0 240 60">
+						  <polygon points="20,50 40,10 60,50" stroke="black" fill="none" stroke-width="2"/>
+						  <rect x="80" y="15" width="35" height="35" stroke="black" fill="none" stroke-width="2"/>
+						  <polygon points="140,50 170,50 180,30 155,10 130,30" stroke="black" fill="none" stroke-width="2"/>
+						  <text x="200" y="40" font-size="40">?</text>
+						</svg>`,
+				options: ["A (Triangle)", "B (Square)", "C (Hexagon)", "D (Circle)", "E (Line)", "F (Star)"], 
+				correct: 2, // Hexagon (3 lati, 4 lati, 5 lati -> 6 lati)
 				cat: "Logic" 
 			},
 			{ 
-				text: "Find the missing puzzle piece:", 
-				image: "logic_7.jpg", 
-				options: ["A", "B", "C", "D", "E", "F"], 
-				correct: 1, 
+				text: "Subtraction Logic: Full - Inner = ?", 
+				// Disegno: Cerchio con punto - punto = Cerchio vuoto
+				image: `<svg width="200" height="60" viewBox="0 0 200 60">
+						  <g>
+							<circle cx="30" cy="30" r="20" stroke="black" fill="none" stroke-width="2"/>
+							<circle cx="30" cy="30" r="5" fill="black"/>
+						  </g>
+						  <text x="60" y="35" font-size="20">-</text>
+						  <circle cx="90" cy="30" r="5" fill="black"/>
+						  <text x="110" y="35" font-size="20">=</text>
+						  <text x="140" y="40" font-size="40">?</text>
+						</svg>`,
+				options: ["A (Dot)", "B (Empty Circle)", "C (Full Circle)", "D (Square)", "E (Nothing)", "F (Line)"], 
+				correct: 1, // Empty Circle
 				cat: "Logic" 
 			},
 			{ 
-				text: "Which option satisfies the rule?", 
-				image: "logic_8.jpg", 
-				options: ["A", "B", "C", "D", "E", "F"], 
-				correct: 3, 
+				text: "Visual Analogy: Arrow is to Target as Ball is to...", 
+				// Disegno: Freccia -> Bersaglio :: Palla -> ?
+				image: `<svg width="200" height="60" viewBox="0 0 200 60">
+						  <path d="M10 30 L40 30 M35 25 L40 30 L35 35" stroke="black" stroke-width="2"/>
+						  <circle cx="70" cy="30" r="15" stroke="black" fill="none"/> <circle cx="70" cy="30" r="5" fill="black"/>
+						  <line x1="95" y1="10" x2="95" y2="50" stroke="black"/>
+						  <circle cx="120" cy="30" r="10" fill="black"/>
+						  <text x="150" y="40" font-size="40">?</text>
+						</svg>`,
+				options: ["A (Bat)", "B (Net/Goal)", "C (Hand)", "D (Grass)", "E (Sky)", "F (Shoe)"], 
+				correct: 1, // Net/Goal
 				cat: "Logic" 
 			},
 
-			// --- PART 2: MATH & NUMERICAL (8 Questions) ---
+			// --- PART 2: MATH & NUMERICAL (8 Questions - TEXT ONLY) ---
 			{ 
 				text: "If 3 pencils cost $45, how much do 5 pencils cost?", 
 				options: ["$60", "$55", "$75", "$80", "$95", "$65"], 
@@ -507,8 +571,8 @@
 				correct: 1, cat: "Math" 
 			},
 			{ 
-				text: "Sequence: 2, 5, 11, 23... Next?", 
-				options: ["47", "46", "45", "44", "48", "51"], 
+				text: "0.5 x 0.5 = ?", 
+				options: ["0.25", "1", "0.5", "0.05", "2.5", "0.025"], 
 				correct: 0, cat: "Math" 
 			},
 			{ 
@@ -532,7 +596,7 @@
 				correct: 1, cat: "Math" 
 			},
 
-			// --- PART 3: VERBAL & ANALOGIES (8 Questions) ---
+			// --- PART 3: VERBAL & ANALOGIES (8 Questions - TEXT ONLY) ---
 			{ 
 				text: "Finger is to Hand as Leaf is to...", 
 				options: ["Tree", "Branch", "Root", "Forest", "Trunk", "Flower"], 
@@ -546,6 +610,11 @@
 			{ 
 				text: "Doctor is to Hospital as Teacher is to...", 
 				options: ["Student", "School", "Class", "Book", "Principal", "Library"], 
+				correct: 1, cat: "Verbal" 
+			},
+			{ 
+				text: "Synonym of 'Furious'?", 
+				options: ["Happy", "Angry", "Calm", "Sad", "Annoyed", "Joyful"], 
 				correct: 1, cat: "Verbal" 
 			},
 			{ 
@@ -564,14 +633,9 @@
 				correct: 1, cat: "Verbal" 
 			},
 			{ 
-				text: "Electricity is to Wire as Water is to...", 
-				options: ["Bottle", "River", "Pipe", "Rain", "Glass", "Bucket"], 
-				correct: 2, cat: "Verbal" 
-			},
-			{ 
-				text: "Which word is spelled correctly?", 
-				options: ["Neccessary", "Necessary", "Necesary", "Neccesary", "Nesessary", "Neccecary"], 
-				correct: 1, cat: "Verbal" 
+				text: "Brave is to Cowardly as Happy is to...", 
+				options: ["Smile", "Sad", "Laugh", "Cry", "Miserable", "Joy"], 
+				correct: 4, cat: "Verbal" 
 			}
 		];
 
@@ -614,14 +678,27 @@
 			document.getElementById('question-count').innerText = `Q ${state.currentQ + 1} / ${questions.length}`;
 			document.getElementById('question-category').innerText = q.cat.toUpperCase() + " REASONING";
 			
-			// GESTIONE IMMAGINE VS TESTO
+			// GESTIONE IMMAGINE (SVG) VS TESTO
 			const qTextElement = document.getElementById('question-text');
 			
-			// Se la domanda ha una proprietà "image", mostriamo il tag <img>
+			// Pulisce il contenuto precedente
+			qTextElement.innerHTML = ""; 
+
+			// Se c'è un'immagine (SVG o percorso file), la mostriamo prima del testo
 			if (q.image) {
-				qTextElement.innerHTML = `<img src="${q.image}" class="question-img" alt="Logic Puzzle"><br>${q.text}`;
+				// Contenitore per centrare l'immagine
+				const imgContainer = document.createElement('div');
+				imgContainer.style.textAlign = "center";
+				imgContainer.style.marginBottom = "20px";
+				imgContainer.innerHTML = q.image; // Inserisce il codice SVG
+				qTextElement.appendChild(imgContainer);
+				
+				// Aggiunge il testo della domanda sotto
+				const textNode = document.createElement('div');
+				textNode.innerText = q.text;
+				qTextElement.appendChild(textNode);
 			} else {
-				// Altrimenti solo testo
+				// Solo testo
 				qTextElement.innerText = q.text;
 			}
 			
@@ -636,9 +713,13 @@
 				div.className = 'option-card';
 				div.onclick = () => handleAnswer(idx);
 				
-				// Se è una domanda visiva, le opzioni sono spesso solo A, B, C...
-				// Mettiamo un cerchio colorato o una lettera
-				div.innerHTML = `<div class="option-circle"></div> <strong>${opt}</strong>`;
+				// Se è logica visiva, usiamo le lettere A-F
+				if(q.cat === "Logic") {
+					 div.innerHTML = `<div class="option-circle"></div> <strong>Option ${opt}</strong>`;
+				} else {
+					 div.innerHTML = `<div class="option-circle"></div> ${opt}`;
+				}
+			   
 				container.appendChild(div);
 			});
 		}
