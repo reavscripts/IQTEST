@@ -275,6 +275,23 @@
 			font-weight: bold;
 			margin-right: 10px;
 		}
+		
+		.options-grid {
+			display: grid;
+			/* Crea colonne automatiche: su PC ne mette 2, su mobile 1 */
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+			gap: 15px;
+			margin-top: 40px;
+		}
+		
+		.question-img {
+			max-width: 100%;
+			height: auto;
+			border-radius: 8px;
+			border: 1px solid #e2e8f0;
+			margin-bottom: 20px;
+			box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+		}
 
 		/* Responsività per cellulari */
 		@media (max-width: 600px) {
@@ -414,41 +431,148 @@
 
     <script>
         const questions = [
-			// --- PART 1: LOGIC & PATTERNS (10 Questions) ---
-			{ text: "1, 2, 4, 8, 16... What comes next?", options: ["24", "32", "20", "64"], correct: 1, cat: "Logic" },
-			{ text: "Which shape is the odd one out? Square, Triangle, Circle, Cube", options: ["Square", "Triangle", "Circle", "Cube"], correct: 3, cat: "Logic" }, // Cube is 3D
-			{ text: "A is father of B. B is mother of C. What is A to C?", options: ["Father", "Grandfather", "Uncle", "Son"], correct: 1, cat: "Logic" },
-			{ text: "Complete the sequence: M, T, W, T, F, ...", options: ["S", "M", "T", "W"], correct: 0, cat: "Logic" }, // Days of week
-			{ text: "Z, X, V, T... What comes next?", options: ["R", "S", "Q", "P"], correct: 0, cat: "Logic" }, // Skip 1 letter backwards
-			{ text: "Some months have 30 days, others 31. How many have 28?", options: ["1", "6", "12", "2"], correct: 2, cat: "Logic" }, // All months have 28
-			{ text: "If yesterday was Tuesday, what is the day after tomorrow?", options: ["Friday", "Thursday", "Saturday", "Wednesday"], correct: 0, cat: "Logic" },
-			{ text: "Code: DOG = 4-15-7. CAT = ?", options: ["3-1-20", "3-1-19", "2-1-20", "3-1-7"], correct: 0, cat: "Logic" },
-			{ text: "Mary's father has 5 daughters: Nana, Nene, Nini, Nono. The 5th?", options: ["Nunu", "Nina", "Mary", "None"], correct: 2, cat: "Logic" },
-			{ text: "All A are B. All B are C. Therefore...", options: ["All A are C", "Some C are A", "No A is C", "None"], correct: 0, cat: "Logic" },
+			// --- PART 1: VISUAL LOGIC (8 Questions - REQUIRE IMAGES) ---
+			// NOTA: Devi avere i file immagini (logic_1.jpg, etc.) nella cartella del sito!
+			{ 
+				text: "Which tile completes the pattern?", 
+				image: "logic_1.jpg", // Sostituisci col nome del tuo file immagine
+				options: ["A", "B", "C", "D", "E", "F"], 
+				correct: 1, // Esempio: B è la risposta giusta
+				cat: "Logic" 
+			},
+			{ 
+				text: "Select the missing segment:", 
+				image: "logic_2.jpg", 
+				options: ["A", "B", "C", "D", "E", "F"], 
+				correct: 3, 
+				cat: "Logic" 
+			},
+			{ 
+				text: "Identify the logical continuation:", 
+				image: "logic_3.jpg", 
+				options: ["A", "B", "C", "D", "E", "F"], 
+				correct: 0, 
+				cat: "Logic" 
+			},
+			{ 
+				text: "Which grid fits the matrix?", 
+				image: "logic_4.jpg", 
+				options: ["A", "B", "C", "D", "E", "F"], 
+				correct: 5, 
+				cat: "Logic" 
+			},
+			{ 
+				text: "Choose the correct geometric shape:", 
+				image: "logic_5.jpg", 
+				options: ["A", "B", "C", "D", "E", "F"], 
+				correct: 2, 
+				cat: "Logic" 
+			},
+			{ 
+				text: "Complete the visual sequence:", 
+				image: "logic_6.jpg", 
+				options: ["A", "B", "C", "D", "E", "F"], 
+				correct: 4, 
+				cat: "Logic" 
+			},
+			{ 
+				text: "Find the missing puzzle piece:", 
+				image: "logic_7.jpg", 
+				options: ["A", "B", "C", "D", "E", "F"], 
+				correct: 1, 
+				cat: "Logic" 
+			},
+			{ 
+				text: "Which option satisfies the rule?", 
+				image: "logic_8.jpg", 
+				options: ["A", "B", "C", "D", "E", "F"], 
+				correct: 3, 
+				cat: "Logic" 
+			},
 
-			// --- PART 2: MATH & NUMERICAL (10 Questions) ---
-			{ text: "If 3 pencils cost $45, how much do 5 pencils cost?", options: ["$60", "$65", "$75", "$80"], correct: 2, cat: "Math" },
-			{ text: "What is 15% of 200?", options: ["20", "25", "30", "35"], correct: 2, cat: "Math" },
-			{ text: "1/2 of 1/2 of 1/2 of 80 is...", options: ["5", "10", "20", "40"], correct: 1, cat: "Math" },
-			{ text: "0.5 x 0.5 = ?", options: ["0.25", "1", "0.5", "0.05"], correct: 0, cat: "Math" },
-			{ text: "A car travels 60 miles in 1.5 hours. What is the speed?", options: ["30 mph", "40 mph", "45 mph", "90 mph"], correct: 1, cat: "Math" },
-			{ text: "Which number is the odd one out? 4, 9, 16, 25, 30", options: ["4", "16", "25", "30"], correct: 3, cat: "Math" }, // 30 is not a square
-			{ text: "If it takes 5 machines 5 min to make 5 widgets, how long for 100 machines for 100 widgets?", options: ["100 min", "5 min", "1 hour", "50 min"], correct: 1, cat: "Math" },
-			{ text: "A bat and a ball cost $1.10. The bat costs $1 more than the ball. Ball cost?", options: ["$0.10", "$0.05", "$0.01", "$0.50"], correct: 1, cat: "Math" },
-			{ text: "What is the square root of 144?", options: ["10", "11", "12", "14"], correct: 2, cat: "Math" },
-			{ text: "Sequence: 2, 5, 11, 23... Next?", options: ["47", "46", "45", "44"], correct: 0, cat: "Math" }, // x2 + 1
+			// --- PART 2: MATH & NUMERICAL (8 Questions) ---
+			{ 
+				text: "If 3 pencils cost $45, how much do 5 pencils cost?", 
+				options: ["$60", "$55", "$75", "$80", "$95", "$65"], 
+				correct: 2, cat: "Math" 
+			},
+			{ 
+				text: "What is 15% of 200?", 
+				options: ["20", "45", "30", "35", "15", "25"], 
+				correct: 2, cat: "Math" 
+			},
+			{ 
+				text: "1/2 of 1/2 of 1/2 of 80 is...", 
+				options: ["5", "10", "20", "40", "2.5", "15"], 
+				correct: 1, cat: "Math" 
+			},
+			{ 
+				text: "Sequence: 2, 5, 11, 23... Next?", 
+				options: ["47", "46", "45", "44", "48", "51"], 
+				correct: 0, cat: "Math" 
+			},
+			{ 
+				text: "A car travels 60 miles in 1.5 hours. What is the speed?", 
+				options: ["30 mph", "40 mph", "45 mph", "90 mph", "50 mph", "55 mph"], 
+				correct: 1, cat: "Math" 
+			},
+			{ 
+				text: "Which number is the odd one out? 4, 9, 16, 25, 30, 36", 
+				options: ["4", "16", "25", "30", "9", "36"], 
+				correct: 3, cat: "Math" 
+			},
+			{ 
+				text: "If it takes 5 machines 5 min to make 5 widgets, how long for 100 machines for 100 widgets?", 
+				options: ["100 min", "5 min", "1 hour", "50 min", "20 min", "500 min"], 
+				correct: 1, cat: "Math" 
+			},
+			{ 
+				text: "A bat and a ball cost $1.10. The bat costs $1 more than the ball. Ball cost?", 
+				options: ["$0.10", "$0.05", "$0.01", "$0.50", "$0.09", "$0.20"], 
+				correct: 1, cat: "Math" 
+			},
 
-			// --- PART 3: VERBAL & ANALOGIES (10 Questions) ---
-			{ text: "Finger is to Hand as Leaf is to...", options: ["Tree", "Branch", "Root", "Forest"], correct: 1, cat: "Verbal" },
-			{ text: "Opposite of 'Expand'?", options: ["Shrink", "Grow", "Increase", "Stretch"], correct: 0, cat: "Verbal" },
-			{ text: "Doctor is to Hospital as Teacher is to...", options: ["Student", "School", "Class", "Book"], correct: 1, cat: "Verbal" },
-			{ text: "Synonym of 'Furious'?", options: ["Happy", "Angry", "Calm", "Sad"], correct: 1, cat: "Verbal" },
-			{ text: "Water is to Ice as Milk is to...", options: ["Cow", "Cheese", "White", "Liquid"], correct: 1, cat: "Verbal" },
-			{ text: "Which word does not belong?", options: ["Apple", "Banana", "Carrot", "Grape"], correct: 2, cat: "Verbal" }, // Carrot is root/veg
-			{ text: "Unscramble: LBAFOTOL is a...", options: ["City", "Sport", "Animal", "Food"], correct: 1, cat: "Verbal" },
-			{ text: "Brave is to Cowardly as Happy is to...", options: ["Smile", "Sad", "Laugh", "Cry"], correct: 1, cat: "Verbal" },
-			{ text: "Electricity is to Wire as Water is to...", options: ["Bottle", "River", "Pipe", "Rain"], correct: 2, cat: "Verbal" },
-			{ text: "Which word is spelled correctly?", options: ["Neccessary", "Necessary", "Necesary", "Neccesary"], correct: 1, cat: "Verbal" }
+			// --- PART 3: VERBAL & ANALOGIES (8 Questions) ---
+			{ 
+				text: "Finger is to Hand as Leaf is to...", 
+				options: ["Tree", "Branch", "Root", "Forest", "Trunk", "Flower"], 
+				correct: 1, cat: "Verbal" 
+			},
+			{ 
+				text: "Opposite of 'Expand'?", 
+				options: ["Shrink", "Grow", "Increase", "Stretch", "Widen", "Contract"], 
+				correct: 5, cat: "Verbal" 
+			},
+			{ 
+				text: "Doctor is to Hospital as Teacher is to...", 
+				options: ["Student", "School", "Class", "Book", "Principal", "Library"], 
+				correct: 1, cat: "Verbal" 
+			},
+			{ 
+				text: "Water is to Ice as Milk is to...", 
+				options: ["Cow", "Cheese", "White", "Liquid", "Yogurt", "Cream"], 
+				correct: 1, cat: "Verbal" 
+			},
+			{ 
+				text: "Which word does not belong?", 
+				options: ["Apple", "Banana", "Carrot", "Grape", "Orange", "Mango"], 
+				correct: 2, cat: "Verbal" 
+			},
+			{ 
+				text: "Unscramble: LBAFOTOL is a...", 
+				options: ["City", "Sport", "Animal", "Food", "Country", "Object"], 
+				correct: 1, cat: "Verbal" 
+			},
+			{ 
+				text: "Electricity is to Wire as Water is to...", 
+				options: ["Bottle", "River", "Pipe", "Rain", "Glass", "Bucket"], 
+				correct: 2, cat: "Verbal" 
+			},
+			{ 
+				text: "Which word is spelled correctly?", 
+				options: ["Neccessary", "Necessary", "Necesary", "Neccesary", "Nesessary", "Neccecary"], 
+				correct: 1, cat: "Verbal" 
+			}
 		];
 
         let state = {
@@ -486,26 +610,39 @@
         }
 
         function renderQuestion() {
-            const q = questions[state.currentQ];
-            document.getElementById('question-count').innerText = `Q ${state.currentQ + 1} / ${questions.length}`;
-            document.getElementById('question-category').innerText = q.cat.toUpperCase() + " REASONING";
-            document.getElementById('question-text').innerText = q.text;
-            
-            const pct = ((state.currentQ) / questions.length) * 100;
-            document.getElementById('progress-fill').style.width = pct + '%';
+			const q = questions[state.currentQ];
+			document.getElementById('question-count').innerText = `Q ${state.currentQ + 1} / ${questions.length}`;
+			document.getElementById('question-category').innerText = q.cat.toUpperCase() + " REASONING";
+			
+			// GESTIONE IMMAGINE VS TESTO
+			const qTextElement = document.getElementById('question-text');
+			
+			// Se la domanda ha una proprietà "image", mostriamo il tag <img>
+			if (q.image) {
+				qTextElement.innerHTML = `<img src="${q.image}" class="question-img" alt="Logic Puzzle"><br>${q.text}`;
+			} else {
+				// Altrimenti solo testo
+				qTextElement.innerText = q.text;
+			}
+			
+			const pct = ((state.currentQ) / questions.length) * 100;
+			document.getElementById('progress-fill').style.width = pct + '%';
 
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-            
-            q.options.forEach((opt, idx) => {
-                const div = document.createElement('div');
-                div.className = 'option-card';
-                div.onclick = () => handleAnswer(idx);
-                div.innerText = opt;
-                container.appendChild(div);
-            });
-        }
-
+			const container = document.getElementById('options-container');
+			container.innerHTML = '';
+			
+			q.options.forEach((opt, idx) => {
+				const div = document.createElement('div');
+				div.className = 'option-card';
+				div.onclick = () => handleAnswer(idx);
+				
+				// Se è una domanda visiva, le opzioni sono spesso solo A, B, C...
+				// Mettiamo un cerchio colorato o una lettera
+				div.innerHTML = `<div class="option-circle"></div> <strong>${opt}</strong>`;
+				container.appendChild(div);
+			});
+		}
+		
         function handleAnswer(idx) {
             const q = questions[state.currentQ];
             if (idx === q.correct) {
