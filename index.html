@@ -35,26 +35,94 @@
         }
 
         /* HEADER */
-        header {
-            width: 100%;
-            max-width: 800px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
+		header {
+			width: 100%;
+			background: rgba(255, 255, 255, 0.95); /* Leggermente trasparente */
+			backdrop-filter: blur(10px); /* Effetto vetro sfocato */
+			padding: 15px 0;
+			box-shadow: 0 4px 20px rgba(0,0,0,0.04); /* Ombra molto morbida */
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: sticky; /* Rimane fisso in alto */
+			top: 0;
+			z-index: 1000;
+			border-bottom: 1px solid rgba(0,0,0,0.05);
+		}
 
-        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -0.5px; }
-        
-        #timer-badge {
-            background-color: #fee2e2;
-            color: #991b1b;
-            font-weight: 600;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: none;
-        }
+		.header-content {
+			width: 90%;
+			max-width: 800px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		/* Contenitore Logo + Testo */
+		.brand-container {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			cursor: default;
+		}
+
+		/* L'icona SVG del cervello/neuroni */
+		.brand-icon {
+			width: 42px;
+			height: 42px;
+			/* Colore esatto del PDF (Royal Blue) */
+			background-color: #2563eb; 
+			border-radius: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			/* Ombra più coerente col blu */
+			box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+		}
+
+		.brand-icon svg {
+			width: 24px;
+			height: 24px;
+			/* Rimuovi fill: white perché useremo stroke/fill specifici nell'SVG */
+		}
+
+		/* Testo del logo */
+		.brand-text {
+			display: flex;
+			flex-direction: column;
+			line-height: 1.1;
+		}
+
+		.brand-name {
+			font-family: 'Inter', sans-serif;
+			font-weight: 800;
+			font-size: 1.25rem;
+			color: var(--primary);
+			letter-spacing: -0.5px;
+		}
+
+		.brand-subtitle {
+			font-family: 'Inter', sans-serif;
+			font-size: 0.65rem;
+			text-transform: uppercase;
+			letter-spacing: 1.5px;
+			color: #64748b;
+			font-weight: 600;
+		}
+
+		/* Timer migliorato */
+		#timer-badge {
+			background-color: #fff1f2;
+			color: #be123c;
+			font-weight: 700;
+			padding: 8px 16px;
+			border-radius: 30px;
+			font-size: 0.95rem;
+			border: 1px solid #fecdd3;
+			display: none; /* Gestito da JS */
+			box-shadow: 0 2px 5px rgba(190, 18, 60, 0.1);
+			font-variant-numeric: tabular-nums; /* Evita che i numeri saltino */
+		}
 
         /* CARDS */
         .card {
@@ -115,23 +183,43 @@
             margin-top: 40px;
         }
         
-        .option-card {
-            background: white;
-            border: 2px solid #e2e8f0;
-            padding: 18px 24px;
-            border-radius: 12px;
-            cursor: pointer;
-            text-align: left;
-            font-weight: 500;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-        }
-        
-        .option-card:hover {
-            border-color: var(--accent);
-            background-color: #eff6ff;
-        }
+        #question-text svg {
+			width: 100%;
+			max-width: 380px; /* Ridotto da 500px a 380px */
+			height: auto;
+			margin-bottom: 25px;
+			filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+		}
+
+		/* Card delle Risposte */
+		.option-card {
+			background: white;
+			border: 2px solid #e2e8f0;
+			padding: 10px; 
+			border-radius: 12px;
+			cursor: pointer;
+			text-align: center;
+			transition: all 0.2s;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			min-height: 110px; /* Ridotto da 140px */
+		}
+
+		.option-card:hover {
+			border-color: var(--accent);
+			background-color: #eff6ff;
+			transform: translateY(-3px);
+			box-shadow: 0 5px 15px rgba(59, 130, 246, 0.15);
+		}
+		
+		.option-svg-container svg {
+			width: 65px;  /* Ridotto da 90px a 65px */
+			height: 65px;
+			display: block;
+			margin: 0 auto;
+		}
 
         /* RESULTS BLUR */
         .result-blur-wrapper {
@@ -149,6 +237,24 @@
             user-select: none;
             pointer-events: none;
         }
+
+		/* Stile specifico per l'SVG dentro le risposte */
+		.option-svg {
+			width: 80px;  /* Dimensione fissa per le risposte */
+			height: 80px;
+			margin-bottom: 10px;
+		}
+
+		/* L'etichetta A, B, C, D... */
+		.option-label {
+			font-weight: 800;
+			color: #64748b;
+			font-size: 1rem; /* Leggermente più piccolo */
+			margin-top: 8px;
+			border-top: 1px solid #eee;
+			width: 100%;
+			padding-top: 4px;
+		}
 
         .paywall-overlay {
             position: absolute;
@@ -293,6 +399,26 @@
 			box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 		}
 
+		.footer-legal {
+			font-size: 0.75rem; 
+			color: #94a3b8; 
+			margin-top: auto; /* Spinge il footer in fondo alla pagina */
+			padding: 20px 0;
+			width: 100%;
+			text-align: center;
+		}
+
+		.footer-legal a {
+			color: inherit;
+			text-decoration: none;
+			margin: 0 5px;
+		}
+
+		.footer-legal a:hover {
+			text-decoration: underline;
+			color: var(--primary);
+		}
+
 		/* Responsività per cellulari */
 		@media (max-width: 600px) {
 			.features-grid { grid-template-columns: 1fr; }
@@ -303,9 +429,26 @@
 <body>
 
     <header>
-        <div class="logo">IQ METRICS GLOBAL</div>
-        <div id="timer-badge">20:00</div>
-    </header>
+		<div class="header-content">
+			<div class="brand-container">
+				<div class="brand-icon">
+					<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M12 7L7 17M12 7L17 17M7 17H17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<circle cx="12" cy="7" r="2.5" fill="white"/>
+						<circle cx="7" cy="17" r="2.5" fill="white"/>
+						<circle cx="17" cy="17" r="2.5" fill="white"/>
+					</svg>
+				</div>
+				
+				<div class="brand-text">
+					<span class="brand-name">IQ METRICS <span style="font-weight:400; color:#64748b;">GLOBAL</span></span>
+					<span class="brand-subtitle">Certified Assessment</span>
+				</div>
+			</div>
+
+			<div id="timer-badge">20:00</div>
+		</div>
+	</header>
 
     <div id="intro" class="card">
 		<div class="hero-badge">Standardized 2026 Edition</div>
@@ -411,11 +554,6 @@
         <p style="font-size: 0.8rem; color: #94a3b8;">€1.00 Processing Fee • Instant PDF Download</p>
 
     </div>
-	
-	<div style="font-size: 0.7rem; margin-top: 15px; color: #94a3b8;">
-		<a href="privacy.html" target="_blank" style="color: inherit;">Privacy Policy</a> | 
-		<a href="terms.html" target="_blank" style="color: inherit;">Terms of Service</a>
-	</div>
 
     <div id="result-paid" class="card hidden">
         <div style="background: #dcfce7; color: #166534; padding: 10px; border-radius: 8px; display:inline-block; font-weight:600; font-size:0.9rem; margin-bottom:20px;">Payment Confirmed</div>
@@ -434,6 +572,11 @@
         <button class="btn" onclick="generateProfessionalPDF()">Download Professional Report (PDF)</button>
     </div>
 
+	<div class="footer-legal">
+        <a href="privacy.html" target="_blank">Privacy Policy</a> | 
+        <a href="terms.html" target="_blank">Terms of Service</a>
+    </div>
+	
     <script>
         const questions = [
 			// --- PART 1: MATH & NUMERICAL (10 Questions - TEXT ONLY) ---
@@ -540,79 +683,150 @@
 				correct: 1, cat: "Verbal" 
 			},
 
-			// --- PART 3: VISUAL LOGIC (10 Questions - SVG IMAGES AT THE END) ---
+			// --- PART 3: VISUAL LOGIC (10 Questions - SVG STYLED & FIXED) ---
 			{ 
 				text: "Which shape completes the sequence?", 
-				image: `<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="20" stroke="black" stroke-width="3" fill="none" /><path d="M55 30 L65 30" stroke="black" stroke-width="2" marker-end="url(#arrow)" /><circle cx="90" cy="30" r="20" stroke="black" stroke-width="3" fill="none" /><path d="M90 10 A20 20 0 0 1 90 50 Z" fill="black" /><path d="M115 30 L125 30" stroke="black" stroke-width="2" marker-end="url(#arrow)" /><text x="150" y="40" font-family="Arial" font-size="40">?</text></svg>`,
-				options: ["A (Empty)", "B (Full Circle)", "C (Square)", "D (Line)", "E (Dot)", "F (Cross)"], 
+				image: `<svg width="400" height="120" viewBox="0 0 200 60"><circle cx="30" cy="30" r="20" stroke="black" stroke-width="3" fill="none" /><path d="M55 30 L65 30" stroke="black" stroke-width="2" marker-end="url(#arrow)" /><circle cx="90" cy="30" r="20" stroke="black" stroke-width="3" fill="none" /><path d="M90 10 A20 20 0 0 1 90 50 Z" fill="black" /><path d="M115 30 L125 30" stroke="black" stroke-width="2" marker-end="url(#arrow)" /><text x="150" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="40">?</text></svg>`,
+				options: [
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" stroke="black" fill="none" stroke-width="3"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" stroke="black" fill="black"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="5" y="5" width="40" height="40" stroke="black" fill="none" stroke-width="3"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><line x1="5" y1="25" x2="45" y2="25" stroke="black" stroke-width="3"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="5" fill="black"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><path d="M10 10 L40 40 M40 10 L10 40" stroke="black" stroke-width="3"/></svg>` 
+				], 
 				correct: 1, cat: "Logic" 
 			},
 			{ 
-				text: "Select the missing segment based on rotation:", 
-				image: `<svg width="200" height="60" viewBox="0 0 240 60"><g transform="translate(30,30)"><line x1="0" y1="0" x2="0" y2="-20" stroke="black" stroke-width="4"/><circle cx="0" cy="0" r="22" stroke="black" fill="none"/></g><g transform="translate(90,30)"><line x1="0" y1="0" x2="20" y2="0" stroke="black" stroke-width="4"/><circle cx="0" cy="0" r="22" stroke="black" fill="none"/></g><g transform="translate(150,30)"><line x1="0" y1="0" x2="0" y2="20" stroke="black" stroke-width="4"/><circle cx="0" cy="0" r="22" stroke="black" fill="none"/></g><text x="200" y="40" font-family="Arial" font-size="40">?</text></svg>`,
-				options: ["A (Up)", "B (Right)", "C (Down)", "D (Left)", "E (Center)", "F (Diagonal)"], 
+				text: "Select the missing segment (Rotation):", 
+				image: `<svg width="400" height="120" viewBox="0 0 240 60"><g transform="translate(30,30)"><line x1="0" y1="0" x2="0" y2="-20" stroke="black" stroke-width="4"/><circle cx="0" cy="0" r="22" stroke="black" fill="none"/></g><g transform="translate(90,30)"><line x1="0" y1="0" x2="20" y2="0" stroke="black" stroke-width="4"/><circle cx="0" cy="0" r="22" stroke="black" fill="none"/></g><g transform="translate(150,30)"><line x1="0" y1="0" x2="0" y2="20" stroke="black" stroke-width="4"/><circle cx="0" cy="0" r="22" stroke="black" fill="none"/></g><text x="200" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="40">?</text></svg>`,
+				options: [
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="22" stroke="black" fill="none"/><line x1="25" y1="25" x2="25" y2="5" stroke="black" stroke-width="4"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="22" stroke="black" fill="none"/><line x1="25" y1="25" x2="45" y2="25" stroke="black" stroke-width="4"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="22" stroke="black" fill="none"/><line x1="25" y1="25" x2="25" y2="45" stroke="black" stroke-width="4"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="22" stroke="black" fill="none"/><line x1="25" y1="25" x2="5" y2="25" stroke="black" stroke-width="4"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="22" stroke="black" fill="none"/><circle cx="25" cy="25" r="5" fill="black"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="22" stroke="black" fill="none"/><line x1="10" y1="10" x2="40" y2="40" stroke="black" stroke-width="4"/></svg>` 
+				], 
 				correct: 3, cat: "Logic" 
 			},
 			{ 
-				text: "Logic Math: How many squares?", 
-				image: `<svg width="200" height="60" viewBox="0 0 200 60"><rect x="10" y="20" width="20" height="20" stroke="black" fill="none" stroke-width="2"/><rect x="60" y="20" width="20" height="20" stroke="black" fill="none" stroke-width="2"/><rect x="70" y="20" width="20" height="20" stroke="black" fill="none" stroke-width="2"/><text x="140" y="40" font-family="Arial" font-size="40">?</text></svg>`,
-				options: ["A (1)", "B (2)", "C (3)", "D (4)", "E (5)", "F (0)"], 
+				text: "How many squares?", 
+				image: `<svg width="400" height="120" viewBox="0 0 200 60"><rect x="10" y="20" width="20" height="20" stroke="black" fill="none" stroke-width="2"/><rect x="60" y="20" width="20" height="20" stroke="black" fill="none" stroke-width="2"/><rect x="70" y="20" width="20" height="20" stroke="black" fill="none" stroke-width="2"/><text x="140" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="40">?</text></svg>`,
+				options: [
+					`<svg viewBox="0 0 50 50"><rect x="15" y="15" width="20" height="20" stroke="black" fill="none" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="10" y="15" width="20" height="20" stroke="black" fill="none" stroke-width="2"/><rect x="20" y="15" width="20" height="20" stroke="black" fill="none" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="5" y="15" width="20" height="20" stroke="black" fill="none" stroke-width="2"/><rect x="15" y="15" width="20" height="20" stroke="black" fill="none" stroke-width="2"/><rect x="25" y="15" width="20" height="20" stroke="black" fill="none" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><text x="25" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="30">4</text></svg>`, 
+					`<svg viewBox="0 0 50 50"><text x="25" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="30">5</text></svg>`, 
+					`<svg viewBox="0 0 50 50"><text x="25" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="30">0</text></svg>` 
+				], 
 				correct: 2, cat: "Logic" 
 			},
 			{ 
-				text: "Which pattern fits the matrix?", 
-				image: `<svg width="100" height="100" viewBox="0 0 100 100"><rect x="0" y="0" width="30" height="30" fill="#ddd"/><text x="10" y="20">X</text><rect x="35" y="0" width="30" height="30" fill="#ddd"/><text x="45" y="20">O</text><rect x="70" y="0" width="30" height="30" fill="#ddd"/><text x="80" y="20">X</text><rect x="0" y="35" width="30" height="30" fill="#ddd"/><text x="10" y="55">O</text><rect x="35" y="35" width="30" height="30" fill="#ddd"/><text x="45" y="55">X</text><rect x="70" y="35" width="30" height="30" fill="#ddd"/><text x="80" y="55">O</text><rect x="0" y="70" width="30" height="30" fill="#ddd"/><text x="10" y="90">X</text><rect x="35" y="70" width="30" height="30" fill="#ddd"/><text x="45" y="90">O</text><rect x="70" y="70" width="30" height="30" fill="white" stroke="black"/><text x="80" y="90">?</text></svg>`,
-				options: ["A (O)", "B (X)", "C (Y)", "D (Empty)", "E (Square)", "F (Triangle)"], 
+				text: "Matrix Completion (X / O):", 
+				image: `<svg width="300" height="300" viewBox="0 0 100 100"><rect x="0" y="0" width="30" height="30" fill="#ddd"/><text x="10" y="20" font-family="Arial, sans-serif" font-weight="bold">X</text><rect x="35" y="0" width="30" height="30" fill="#ddd"/><text x="45" y="20" font-family="Arial, sans-serif" font-weight="bold">O</text><rect x="70" y="0" width="30" height="30" fill="#ddd"/><text x="80" y="20" font-family="Arial, sans-serif" font-weight="bold">X</text><rect x="0" y="35" width="30" height="30" fill="#ddd"/><text x="10" y="55" font-family="Arial, sans-serif" font-weight="bold">O</text><rect x="35" y="35" width="30" height="30" fill="#ddd"/><text x="45" y="55" font-family="Arial, sans-serif" font-weight="bold">X</text><rect x="70" y="35" width="30" height="30" fill="#ddd"/><text x="80" y="55" font-family="Arial, sans-serif" font-weight="bold">O</text><rect x="0" y="70" width="30" height="30" fill="#ddd"/><text x="10" y="90" font-family="Arial, sans-serif" font-weight="bold">X</text><rect x="35" y="70" width="30" height="30" fill="#ddd"/><text x="45" y="90" font-family="Arial, sans-serif" font-weight="bold">O</text><rect x="70" y="70" width="30" height="30" fill="white" stroke="black"/><text x="80" y="90" font-family="Arial, sans-serif" font-weight="bold">?</text></svg>`,
+				options: [
+					`<svg viewBox="0 0 50 50"><text x="25" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="30">O</text></svg>`, 
+					`<svg viewBox="0 0 50 50"><text x="25" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="30">X</text></svg>`, 
+					`<svg viewBox="0 0 50 50"><text x="25" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="30">Y</text></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="10" y="10" width="30" height="30" stroke="black" fill="none"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="15" stroke="black" fill="none"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><polygon points="25,10 40,40 10,40" stroke="black" fill="none"/></svg>` 
+				], 
 				correct: 1, cat: "Logic" 
 			},
 			{ 
-				text: "Addition Logic: Shape 1 + Shape 2 = ?", 
-				image: `<svg width="200" height="60" viewBox="0 0 200 60"><line x1="20" y1="10" x2="20" y2="50" stroke="black" stroke-width="4" /><text x="50" y="40" font-size="30">+</text><line x1="80" y1="30" x2="120" y2="30" stroke="black" stroke-width="4" /><text x="140" y="40" font-size="30">=</text><text x="170" y="40" font-size="40">?</text></svg>`,
-				options: ["A (-)", "B (|)", "C (+)", "D (x)", "E (=)", "F (/)"], 
+				text: "Shape arithmetic: | + - = ?", 
+				image: `<svg width="400" height="120" viewBox="0 0 200 60"><line x1="20" y1="10" x2="20" y2="50" stroke="black" stroke-width="4" /><text x="50" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="30">+</text><line x1="80" y1="30" x2="120" y2="30" stroke="black" stroke-width="4" /><text x="140" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="30">=</text><text x="170" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="40">?</text></svg>`,
+				options: [
+					`<svg viewBox="0 0 50 50"><line x1="10" y1="25" x2="40" y2="25" stroke="black" stroke-width="4"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><line x1="25" y1="10" x2="25" y2="40" stroke="black" stroke-width="4"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><path d="M25 10 L25 40 M10 25 L40 25" stroke="black" stroke-width="4"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><path d="M10 10 L40 40 M40 10 L10 40" stroke="black" stroke-width="4"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><path d="M10 20 L40 20 M10 30 L40 30" stroke="black" stroke-width="4"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><line x1="10" y1="40" x2="40" y2="10" stroke="black" stroke-width="4"/></svg>` 
+				], 
 				correct: 2, cat: "Logic" 
 			},
 			{ 
-				text: "Which fits the sequence?", 
-				image: `<svg width="240" height="60" viewBox="0 0 240 60"><polygon points="20,50 40,10 60,50" stroke="black" fill="none" stroke-width="2"/><rect x="80" y="15" width="35" height="35" stroke="black" fill="none" stroke-width="2"/><polygon points="140,50 170,50 180,30 155,10 130,30" stroke="black" fill="none" stroke-width="2"/><text x="200" y="40" font-size="40">?</text></svg>`,
-				options: ["A (Triangle)", "B (Square)", "C (Hexagon)", "D (Circle)", "E (Line)", "F (Star)"], 
+				text: "Sequence by sides: Triangle, Square, Pentagon, ?", 
+				image: `<svg width="400" height="100" viewBox="0 0 240 60"><polygon points="20,50 40,10 60,50" stroke="black" fill="none" stroke-width="2"/><rect x="80" y="15" width="35" height="35" stroke="black" fill="none" stroke-width="2"/><polygon points="140,50 170,50 180,30 155,10 130,30" stroke="black" fill="none" stroke-width="2"/><text x="200" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="40">?</text></svg>`,
+				options: [
+					`<svg viewBox="0 0 50 50"><polygon points="25,5 45,45 5,45" stroke="black" fill="none" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="10" y="10" width="30" height="30" stroke="black" fill="none" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><polygon points="15,5 35,5 45,25 35,45 15,45 5,25" stroke="black" fill="none" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" stroke="black" fill="none" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><line x1="10" y1="25" x2="40" y2="25" stroke="black" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><polygon points="25,5 30,20 45,20 35,30 40,45 25,35 10,45 15,30 5,20 20,20" stroke="black" fill="none"/></svg>` 
+				], 
 				correct: 2, cat: "Logic" 
 			},
 			{ 
-				text: "Subtraction Logic: Full - Inner = ?", 
-				image: `<svg width="200" height="60" viewBox="0 0 200 60"><g><circle cx="30" cy="30" r="20" stroke="black" fill="none" stroke-width="2"/><circle cx="30" cy="30" r="5" fill="black"/></g><text x="60" y="35" font-size="20">-</text><circle cx="90" cy="30" r="5" fill="black"/><text x="110" y="35" font-size="20">=</text><text x="140" y="40" font-size="40">?</text></svg>`,
-				options: ["A (Dot)", "B (Empty Circle)", "C (Full Circle)", "D (Square)", "E (Nothing)", "F (Line)"], 
+				text: "Subtraction: Full Dot - Inner Dot = ?", 
+				image: `<svg width="400" height="120" viewBox="0 0 200 60"><g><circle cx="30" cy="30" r="20" stroke="black" fill="none" stroke-width="2"/><circle cx="30" cy="30" r="5" fill="black"/></g><text x="60" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="20">-</text><circle cx="90" cy="30" r="5" fill="black"/><text x="110" y="35" font-family="Arial, sans-serif" font-weight="bold" font-size="20">=</text><text x="140" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="40">?</text></svg>`,
+				options: [
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="5" fill="black"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" stroke="black" fill="none" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="black"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="10" y="10" width="30" height="30" stroke="black" fill="none"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><text x="25" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold">0</text></svg>`, 
+					`<svg viewBox="0 0 50 50"><line x1="10" y1="25" x2="40" y2="25" stroke="black"/></svg>` 
+				], 
 				correct: 1, cat: "Logic" 
 			},
 			{ 
-				text: "Visual Analogy: Arrow is to Target as Ball is to...", 
-				image: `<svg width="200" height="60" viewBox="0 0 200 60"><path d="M10 30 L40 30 M35 25 L40 30 L35 35" stroke="black" stroke-width="2"/><circle cx="70" cy="30" r="15" stroke="black" fill="none"/> <circle cx="70" cy="30" r="5" fill="black"/><line x1="95" y1="10" x2="95" y2="50" stroke="black"/><circle cx="120" cy="30" r="10" fill="black"/><text x="150" y="40" font-size="40">?</text></svg>`,
-				options: ["A (Bat)", "B (Net/Goal)", "C (Hand)", "D (Grass)", "E (Sky)", "F (Shoe)"], 
+				text: "Analogy: Arrow -> Target :: Ball -> ?", 
+				image: `<svg width="400" height="120" viewBox="0 0 200 60"><path d="M10 30 L40 30 M35 25 L40 30 L35 35" stroke="black" stroke-width="2"/><circle cx="70" cy="30" r="15" stroke="black" fill="none"/> <circle cx="70" cy="30" r="5" fill="black"/><line x1="95" y1="10" x2="95" y2="50" stroke="black"/><circle cx="120" cy="30" r="10" fill="black"/><text x="150" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="40">?</text></svg>`,
+				options: [
+					`<svg viewBox="0 0 50 50"><path d="M10 40 Q25 10 40 40" stroke="black" fill="none" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="5" y="10" width="40" height="30" stroke="black" fill="none"/><line x1="5" y1="10" x2="45" y2="40" stroke="black"/><line x1="45" y1="10" x2="5" y2="40" stroke="black"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><path d="M15 40 L15 20 L10 10 L20 10 L25 20 L30 10 L40 10 L35 20 L35 40 Z" stroke="black" fill="none"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><path d="M0 40 L10 30 L20 40 L30 30 L40 40" stroke="black" fill="none"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="40" cy="10" r="5" stroke="black" fill="none"/><path d="M10 40 Q25 30 40 40" stroke="black" fill="none"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><path d="M10 30 L30 30 L40 40 L10 40 Z" stroke="black" fill="none"/></svg>` 
+				], 
 				correct: 1, cat: "Logic" 
 			},
-			// --- NUOVE DOMANDE LOGICHE (PER ARRIVARE A 10 VISUALI) ---
 			{
-				text: "Clock Logic: 12:00, 3:00, 6:00... What next?",
-				image: `<svg width="200" height="60" viewBox="0 0 200 60"><circle cx="20" cy="30" r="15" fill="none" stroke="black"/><line x1="20" y1="30" x2="20" y2="15" stroke="black" stroke-width="2"/><circle cx="60" cy="30" r="15" fill="none" stroke="black"/><line x1="60" y1="30" x2="75" y2="30" stroke="black" stroke-width="2"/><circle cx="100" cy="30" r="15" fill="none" stroke="black"/><line x1="100" y1="30" x2="100" y2="45" stroke="black" stroke-width="2"/><text x="140" y="40" font-size="40">?</text></svg>`,
-				options: ["A (9:00)", "B (12:00)", "C (4:30)", "D (1:00)", "E (10:00)", "F (7:00)"],
+				text: "Clock Logic: 12 -> 3 -> 6 -> ?",
+				image: `<svg width="400" height="120" viewBox="0 0 200 60"><circle cx="20" cy="30" r="15" fill="none" stroke="black"/><line x1="20" y1="30" x2="20" y2="15" stroke="black" stroke-width="2"/><circle cx="60" cy="30" r="15" fill="none" stroke="black"/><line x1="60" y1="30" x2="75" y2="30" stroke="black" stroke-width="2"/><circle cx="100" cy="30" r="15" fill="none" stroke="black"/><line x1="100" y1="30" x2="100" y2="45" stroke="black" stroke-width="2"/><text x="140" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="40">?</text></svg>`,
+				options: [
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="black"/><line x1="25" y1="25" x2="5" y2="25" stroke="black" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="black"/><line x1="25" y1="25" x2="25" y2="5" stroke="black" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="black"/><line x1="25" y1="25" x2="35" y2="40" stroke="black" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="black"/><line x1="25" y1="25" x2="35" y2="10" stroke="black" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="black"/><line x1="25" y1="25" x2="10" y2="10" stroke="black" stroke-width="2"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="none" stroke="black"/><line x1="25" y1="25" x2="15" y2="40" stroke="black" stroke-width="2"/></svg>`  
+				],
 				correct: 0, cat: "Logic"
 			},
 			{
-				text: "Growth Pattern: Small, Medium, Big...",
-				image: `<svg width="200" height="60" viewBox="0 0 200 60"><rect x="10" y="40" width="10" height="10" fill="black"/><rect x="40" y="30" width="10" height="20" fill="black"/><rect x="70" y="20" width="10" height="30" fill="black"/><text x="110" y="40" font-size="40">?</text></svg>`,
-				options: ["A (Tiny)", "B (Same)", "C (Taller)", "D (Empty)", "E (Circle)", "F (Flat)"],
+				text: "Growth Pattern: Small -> Medium -> Big -> ?",
+				image: `<svg width="400" height="120" viewBox="0 0 200 60"><rect x="10" y="40" width="10" height="10" fill="black"/><rect x="40" y="30" width="10" height="20" fill="black"/><rect x="70" y="20" width="10" height="30" fill="black"/><text x="110" y="40" font-family="Arial, sans-serif" font-weight="bold" font-size="40">?</text></svg>`,
+				options: [
+					`<svg viewBox="0 0 50 50"><rect x="20" y="20" width="10" height="10" fill="black"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="20" y="10" width="10" height="30" fill="black"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="20" y="5" width="10" height="40" fill="black"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="5" y="5" width="40" height="40" stroke="black" fill="none"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><circle cx="25" cy="25" r="10" fill="black"/></svg>`, 
+					`<svg viewBox="0 0 50 50"><rect x="10" y="20" width="30" height="5" fill="black"/></svg>` 
+				],
 				correct: 2, cat: "Logic"
 			}
 		];
 
         let state = {
-            currentQ: 0,
-            score: 0,
-            catScores: { Logic: 0, Math: 0, Verbal: 0 }, // Traccia i punteggi separati
-            catTotals: { Logic: 0, Math: 0, Verbal: 0 }, // Totale domande per categoria
-            timeLeft: 1200,
-            timerId: null,
-            iq: 0
-        };
+			currentQ: 0,
+			score: 0,
+			userAnswers: [],
+			
+			catScores: { Logic: 0, Math: 0, Verbal: 0 }, 
+			catTotals: { Logic: 0, Math: 0, Verbal: 0 },
+			timeLeft: 1200,
+			timerId: null,
+			iq: 0
+		};
 
         // Calcoliamo i totali per categoria all'avvio
         questions.forEach(q => {
@@ -643,62 +857,81 @@
 			document.getElementById('question-count').innerText = `Q ${state.currentQ + 1} / ${questions.length}`;
 			document.getElementById('question-category').innerText = q.cat.toUpperCase() + " REASONING";
 			
-			// GESTIONE IMMAGINE (SVG) VS TESTO
+			// GESTIONE DOMANDA PRINCIPALE
 			const qTextElement = document.getElementById('question-text');
-			
-			// Pulisce il contenuto precedente
 			qTextElement.innerHTML = ""; 
 
-			// Se c'è un'immagine (SVG o percorso file), la mostriamo prima del testo
 			if (q.image) {
-				// Contenitore per centrare l'immagine
+				// Mostra il disegno della domanda (SVG)
 				const imgContainer = document.createElement('div');
 				imgContainer.style.textAlign = "center";
 				imgContainer.style.marginBottom = "20px";
-				imgContainer.innerHTML = q.image; // Inserisce il codice SVG
+				imgContainer.innerHTML = q.image; 
 				qTextElement.appendChild(imgContainer);
 				
-				// Aggiunge il testo della domanda sotto
+				// Testo opzionale sotto l'immagine
 				const textNode = document.createElement('div');
 				textNode.innerText = q.text;
+				textNode.style.fontSize = "1.2rem";
 				qTextElement.appendChild(textNode);
 			} else {
-				// Solo testo
 				qTextElement.innerText = q.text;
 			}
 			
+			// Barra progresso
 			const pct = ((state.currentQ) / questions.length) * 100;
 			document.getElementById('progress-fill').style.width = pct + '%';
 
+			// GESTIONE RISPOSTE (OPTIONS)
 			const container = document.getElementById('options-container');
 			container.innerHTML = '';
 			
-			q.options.forEach((opt, idx) => {
+			const letters = ["A", "B", "C", "D", "E", "F"]; // Etichette automatiche
+
+			q.options.forEach((optContent, idx) => {
 				const div = document.createElement('div');
 				div.className = 'option-card';
 				div.onclick = () => handleAnswer(idx);
 				
-				// Se è logica visiva, usiamo le lettere A-F
+				let innerHTML = "";
+				
+				// SE È LOGICA: optContent è un codice SVG -> Lo renderizziamo come HTML
 				if(q.cat === "Logic") {
-					 div.innerHTML = `<div class="option-circle"></div> <strong>Option ${opt}</strong>`;
-				} else {
-					 div.innerHTML = `<div class="option-circle"></div> ${opt}`;
+					 innerHTML = `
+						<div class="option-svg-container">${optContent}</div>
+						<div class="option-label">${letters[idx]}</div>
+					 `;
+				} 
+				// SE È ALTRO (Math/Verbal): optContent è testo -> Lo mostriamo come testo
+				else {
+					 innerHTML = `<div style="display:flex; align-items:center; width:100%; padding:10px;"><div class="option-circle"></div> <span style="font-size:1.1rem">${optContent}</span></div>`;
+					 div.style.alignItems = "flex-start"; 
+					 div.style.textAlign = "left";
+					 div.style.minHeight = "auto"; // Meno altezza per testo
 				}
 			   
+				div.innerHTML = innerHTML;
 				container.appendChild(div);
 			});
 		}
 		
         function handleAnswer(idx) {
-            const q = questions[state.currentQ];
-            if (idx === q.correct) {
-                state.score++;
-                state.catScores[q.cat]++; // Aumenta punteggio categoria specifica
-            }
-            state.currentQ++;
-            if (state.currentQ < questions.length) renderQuestion();
-            else finishTest();
-        }
+			// 1. Salviamo la risposta dell'utente nell'array
+			state.userAnswers[state.currentQ] = idx;
+
+			const q = questions[state.currentQ];
+			
+			// 2. Controllo correttezza (come prima)
+			if (idx === q.correct) {
+				state.score++;
+				state.catScores[q.cat]++;
+			}
+			
+			// 3. Avanzamento
+			state.currentQ++;
+			if (state.currentQ < questions.length) renderQuestion();
+			else finishTest();
+		}
 
         function finishTest() {
             clearInterval(state.timerId);
@@ -737,106 +970,293 @@
         }
 
         // --- MOTORE PDF PROFESSIONALE ---
-        function generateProfessionalPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            const width = doc.internal.pageSize.getWidth();
-            const height = doc.internal.pageSize.getHeight();
+		function generateProfessionalPDF() {
+			try {
+				if (!window.jspdf) {
+					alert("Errore: Libreria PDF non caricata. Ricarica la pagina.");
+					return;
+				}
 
-            // 1. INTESTAZIONE (Sfondo Blu Scuro)
-            doc.setFillColor(15, 23, 42); // Navy
-            doc.rect(0, 0, width, 40, 'F');
-            
-            doc.setTextColor(255, 255, 255);
-            doc.setFont("helvetica", "bold");
-            doc.setFontSize(22);
-            doc.text("COGNITIVE PERFORMANCE REPORT", 20, 25);
-            
-            doc.setFontSize(10);
-            doc.setFont("helvetica", "normal");
-            doc.text("Official Metrics & Analysis", width - 20, 25, null, null, "right");
+				const { jsPDF } = window.jspdf;
+				// Crea documento A4 standard
+				const doc = new jsPDF('p', 'mm', 'a4');
+				const width = doc.internal.pageSize.getWidth(); // 210mm
+				const height = doc.internal.pageSize.getHeight(); // 297mm
+				const margin = 20;
 
-            // 2. BOX PUNTEGGIO PRINCIPALE
-            doc.setTextColor(0, 0, 0);
-            doc.setFontSize(12);
-            doc.text("CANDIDATE RESULT", 105, 60, null, null, "center");
-            
-            doc.setFontSize(60);
-            doc.setTextColor(37, 99, 235); // Blue
-            doc.setFont("helvetica", "bold");
-            doc.text(String(state.iq), 105, 80, null, null, "center");
-            
-            doc.setFontSize(14);
-            doc.setTextColor(60, 60, 60);
-            let classText = "Average Intelligence";
-            if(state.iq > 115) classText = "High Intelligence";
-            if(state.iq > 130) classText = "Superior / Gifted";
-            doc.text(classText, 105, 95, null, null, "center");
+				// --- PAGINA 1: OVERVIEW --- //
 
-            // Linea separatrice
-            doc.setDrawColor(200, 200, 200);
-            doc.line(20, 110, width - 20, 110);
+				// 1. HEADER (Sfondo Bianco e Linea Sottile)
+				const headerH = 30; // Ridotto da 40 a 30
+				doc.setFillColor(255, 255, 255); 
+				doc.rect(0, 0, width, headerH, 'F');
+				doc.setDrawColor(230, 230, 230);
+				doc.setLineWidth(0.5);
+				doc.line(0, headerH, width, headerH);
 
-            // 3. DETTAGLIO CATEGORIE (Tabella Simulata)
-            let yPos = 130;
-            doc.setFontSize(16);
-            doc.setTextColor(0, 0, 0);
-            doc.text("Detailed Breakdown", 20, yPos);
-            
-            yPos += 15;
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-            
-            // Math
-            doc.text("Numerical Reasoning:", 20, yPos);
-            doc.text(`${state.catScores.Math} / ${state.catTotals.Math} Correct`, 180, yPos, null, null, "right");
-            doc.setFillColor(220, 220, 220); doc.rect(70, yPos-4, 80, 4, 'F'); // Barra grigia
-            doc.setFillColor(37, 99, 235);   doc.rect(70, yPos-4, (state.catScores.Math/state.catTotals.Math)*80, 4, 'F'); // Barra blu
-            
-            // Logic
-            yPos += 15;
-            doc.text("Logical Patterns:", 20, yPos);
-            doc.text(`${state.catScores.Logic} / ${state.catTotals.Logic} Correct`, 180, yPos, null, null, "right");
-            doc.setFillColor(220, 220, 220); doc.rect(70, yPos-4, 80, 4, 'F');
-            doc.setFillColor(37, 99, 235);   doc.rect(70, yPos-4, (state.catScores.Logic/state.catTotals.Logic)*80, 4, 'F');
+				// --- DISEGNO LOGO VETTORIALE (Ridimensionato) ---
+				const logoSize = 10; // Ridotto da 14 a 10
+				const logoX = margin;
+				const logoY = 10; // Posizione Y
+				
+				// Sfondo Icona
+				doc.setFillColor(37, 99, 235); // Blu
+				doc.roundedRect(logoX, logoY, logoSize, logoSize, 2, 2, 'F');
+				
+				// Pallini e Linee (Scala adattata al nuovo size)
+				doc.setDrawColor(255, 255, 255);
+				doc.setFillColor(255, 255, 255);
+				doc.setLineWidth(0.6);
+				
+				// Coordinate relative dentro il logo 10x10
+				doc.line(logoX + 5, logoY + 3, logoX + 3, logoY + 7); 
+				doc.line(logoX + 5, logoY + 3, logoX + 7, logoY + 7); 
+				doc.line(logoX + 3, logoY + 7, logoX + 7, logoY + 7); 
+				
+				doc.circle(logoX + 5, logoY + 3, 0.8, 'F');  
+				doc.circle(logoX + 3, logoY + 7, 0.8, 'F'); 
+				doc.circle(logoX + 7, logoY + 7, 0.8, 'F'); 
 
-            // Verbal
-            yPos += 15;
-            doc.text("Verbal Analogies:", 20, yPos);
-            doc.text(`${state.catScores.Verbal} / ${state.catTotals.Verbal} Correct`, 180, yPos, null, null, "right");
-            doc.setFillColor(220, 220, 220); doc.rect(70, yPos-4, 80, 4, 'F');
-            doc.setFillColor(37, 99, 235);   doc.rect(70, yPos-4, (state.catScores.Verbal/state.catTotals.Verbal)*80, 4, 'F');
+				// Testo Brand (Più piccolo ed elegante)
+				doc.setFont("helvetica", "bold");
+				doc.setFontSize(16); // Ridotto da 22
+				doc.setTextColor(15, 23, 42); 
+				doc.text("IQ METRICS", margin + 14, logoY + 7);
+				
+				doc.setFont("helvetica", "normal");
+				doc.setTextColor(100, 116, 139); 
+				doc.text("GLOBAL", margin + 52, logoY + 7); 
 
-            // 4. ANALISI TESTUALE (Dinamica)
-            yPos += 30;
-            doc.setFontSize(16);
-            doc.text("Cognitive Profile Analysis", 20, yPos);
-            
-            yPos += 10;
-            doc.setFontSize(10);
-            doc.setTextColor(80, 80, 80);
-            
-            let analysisText = "";
-            if(state.iq < 100) {
-                analysisText = "The results suggest a practical learning style. While some abstract logic tasks presented a challenge, the candidate likely performs better in hands-on, concrete problem-solving scenarios.";
-            } else if (state.iq < 120) {
-                analysisText = "The candidate displays solid logical foundations. Strengths include the ability to follow complex instructions and solve standard problems effectively. Pattern recognition is within the upper-average range.";
-            } else {
-                analysisText = "The candidate demonstrates exceptional cognitive efficiency. The results indicate a high capacity for abstract thinking, rapid pattern recognition, and the ability to grasp complex concepts quickly without need for repetition.";
-            }
-            
-            // Split text to fit width
-            const splitText = doc.splitTextToSize(analysisText, 170);
-            doc.text(splitText, 20, yPos);
+				// Sottotitolo
+				doc.setFontSize(7); // Ridotto da 9
+				doc.setTextColor(148, 163, 184);
+				doc.text("CERTIFIED COGNITIVE ASSESSMENT", margin + 14, logoY + 11); // Allineato sotto
 
-            // 5. FOOTER
-            doc.setFontSize(8);
-            doc.setTextColor(150, 150, 150);
-            doc.text(`Generated on ${new Date().toLocaleDateString()} | ID: ${Math.floor(Math.random()*100000)}`, 20, height - 10);
-            doc.text("IQ Metrics Global - Confidential", width - 20, height - 10, null, null, "right");
+				// ID Badge (Molto più discreto)
+				doc.setFillColor(248, 250, 252);
+				doc.setDrawColor(226, 232, 240);
+				doc.roundedRect(width - margin - 35, logoY + 1, 35, 8, 4, 4, 'FD'); // Più piccolo
+				doc.setFontSize(8);
+				doc.setTextColor(71, 85, 105);
+				doc.text("ID: " + Math.floor(Math.random()*100000), width - margin - 17.5, logoY + 6, null, null, "center");
 
-            doc.save("Cognitive_Report_Official.pdf");
-        }
+				// 2. BOX PUNTEGGIO
+				const scoreY = 50; // Alzato un po'
+				doc.setTextColor(15, 23, 42);
+				doc.setFontSize(10); // Ridotto
+				doc.setFont("helvetica", "bold");
+				doc.text("CANDIDATE RESULT", 105, scoreY, null, null, "center");
+				
+				doc.setFontSize(50); // Ridotto da 60 a 50
+				doc.setTextColor(37, 99, 235); 
+				doc.text(String(state.iq), 105, scoreY + 18, null, null, "center");
+				
+				doc.setFontSize(12); // Ridotto
+				doc.setTextColor(71, 85, 105);
+				doc.setFont("helvetica", "normal");
+				let classText = "Average Intelligence";
+				if(state.iq > 115) classText = "High Intelligence";
+				if(state.iq > 130) classText = "Superior / Gifted";
+				doc.text(classText, 105, scoreY + 26, null, null, "center");
+
+				// Linea separatrice sottile
+				doc.setDrawColor(226, 232, 240);
+				doc.setLineWidth(0.5);
+				doc.line(margin, scoreY + 35, width - margin, scoreY + 35);
+
+				// === 3. GRAFICO GAUSSIANO ===
+				const graphY = scoreY + 45;
+				const graphH = 60; // Altezza contenuta
+				
+				// Sfondo Grafico
+				doc.setFillColor(250, 250, 250); 
+				doc.setDrawColor(230, 230, 230); 
+				doc.rect(margin, graphY, width - (margin * 2), graphH, 'FD');
+
+				doc.setTextColor(15, 23, 42);
+				doc.setFontSize(9);
+				doc.setFont("helvetica", "bold");
+				doc.text("GLOBAL IQ DISTRIBUTION", margin + 10, graphY + 10);
+				doc.setFont("helvetica", "normal");
+				doc.setFontSize(7);
+				doc.setTextColor(100, 116, 139);
+				doc.text("(Mean=100, SD=15)", margin + 10, graphY + 14);
+
+				const gBaseY = graphY + 45; 
+				const gStartX = margin + 10;
+				const gWidth = width - (margin * 2) - 20;
+				const gMaxH = 30; 
+
+				// Disegno curva
+				doc.setDrawColor(59, 130, 246); 
+				doc.setLineWidth(0.8);
+
+				for(let i = 0; i <= 100; i++) {
+					const sd = -3.5 + (i / 100) * 7; 
+					const yVal = Math.exp(-0.5 * sd * sd); 
+					const px = gStartX + (i / 100) * gWidth;
+					const py = gBaseY - (yVal * gMaxH);
+					if(i === 0) doc.moveTo(px, py);
+					else doc.lineTo(px, py);
+				}
+				doc.stroke();
+
+				// Linea base
+				doc.setDrawColor(148, 163, 184);
+				doc.line(gStartX, gBaseY, gStartX + gWidth, gBaseY);
+
+				// Marcatori
+				const markers = [-2, -1, 0, 1, 2];
+				markers.forEach(sd => {
+					const iqVal = 100 + (sd * 15);
+					const percentX = (sd - (-3.5)) / 7; 
+					const lineX = gStartX + (percentX * gWidth);
+					doc.setDrawColor(200, 200, 200);
+					doc.setLineWidth(0.1);
+					doc.line(lineX, gBaseY, lineX, gBaseY - (Math.exp(-0.5 * sd * sd) * gMaxH));
+					doc.setFontSize(6);
+					doc.setTextColor(150, 150, 150);
+					doc.text(String(iqVal), lineX, gBaseY + 4, null, null, "center");
+				});
+
+				// YOU Marker
+				const userSD = (state.iq - 100) / 15;
+				const clampedSD = Math.max(-3.4, Math.min(3.4, userSD)); 
+				const userX = gStartX + ((clampedSD - (-3.5)) / 7) * gWidth;
+				const curveHeightAtUser = Math.exp(-0.5 * clampedSD * clampedSD) * gMaxH;
+				const lineStopY = gBaseY - curveHeightAtUser; 
+
+				doc.setDrawColor(245, 158, 11); // Amber
+				doc.setLineWidth(1.5);
+				doc.line(userX, graphY + 20, userX, lineStopY - 1); 
+				
+				doc.setFillColor(245, 158, 11);
+				doc.circle(userX, lineStopY, 1.5, 'F'); 
+
+				// Etichetta YOU (Piccola)
+				doc.setFontSize(7);
+				doc.setTextColor(255, 255, 255); 
+				doc.setFont("helvetica", "bold");
+				doc.roundedRect(userX - 6, graphY + 16, 12, 4, 1, 1, 'F'); // Background arancione
+				doc.text("YOU", userX, graphY + 19, null, null, "center");
+
+				// 4. BREAKDOWN
+				let yPos = graphY + graphH + 15;
+				doc.setFontSize(11);
+				doc.setTextColor(15, 23, 42);
+				doc.text("Detailed Breakdown", margin, yPos);
+				yPos += 8;
+				doc.setFontSize(9);
+				doc.setFont("helvetica", "normal");
+				
+				function drawBar(label, score, total, y) {
+					doc.setTextColor(71, 85, 105);
+					doc.text(label, margin, y);
+					doc.text(`${score} / ${total}`, width - margin, y, null, null, "right");
+					
+					doc.setFillColor(241, 245, 249); 
+					doc.roundedRect(70, y-3, 90, 3, 1, 1, 'F'); 
+					if(total > 0) {
+						doc.setFillColor(37, 99, 235);   
+						doc.roundedRect(70, y-3, (score/total)*90, 3, 1, 1, 'F'); 
+					}
+				}
+
+				drawBar("Numerical Reasoning:", state.catScores.Math, state.catTotals.Math, yPos);
+				yPos += 8;
+				drawBar("Logical Patterns:", state.catScores.Logic, state.catTotals.Logic, yPos);
+				yPos += 8;
+				drawBar("Verbal Analogies:", state.catScores.Verbal, state.catTotals.Verbal, yPos);
+
+				// 5. ANALISI TESTUALE
+				yPos += 18;
+				doc.setFontSize(11);
+				doc.setFont("helvetica", "bold");
+				doc.setTextColor(15, 23, 42);
+				doc.text("Cognitive Profile Analysis", margin, yPos);
+				yPos += 6;
+				doc.setFontSize(9); // Font più piccolo per il testo lungo
+				doc.setFont("helvetica", "normal");
+				doc.setTextColor(71, 85, 105); 
+				
+				let analysisText = "";
+				if(state.iq < 100) {
+					analysisText = "The results suggest a practical learning style. While abstract logic tasks presented a challenge, the candidate likely performs better in hands-on, concrete problem-solving scenarios where experience can be applied directly.";
+				} else if (state.iq < 120) {
+					analysisText = "The candidate displays solid logical foundations. Strengths include the ability to follow complex instructions and solve standard problems effectively. Pattern recognition is within the upper-average range, showing good potential for analytical tasks.";
+				} else {
+					analysisText = "The candidate demonstrates exceptional cognitive efficiency. The results indicate a high capacity for abstract thinking, rapid pattern recognition, and the ability to grasp complex concepts quickly. This profile is often associated with high-level strategic planning capabilities.";
+				}
+				
+				const splitText = doc.splitTextToSize(analysisText, width - (margin * 2));
+				doc.text(splitText, margin, yPos);
+
+				// --- PAGINA 2: ERRORI ---
+				doc.addPage();
+				
+				// Header Pagina 2 minimale
+				doc.setFillColor(248, 250, 252);
+				doc.rect(0, 0, width, 15, 'F');
+				doc.setFontSize(9);
+				doc.setTextColor(100, 116, 139);
+				doc.setFont("helvetica", "bold");
+				doc.text("APPENDIX: ERROR ANALYSIS", margin, 10);
+
+				yPos = 30;
+				const letters = ["A", "B", "C", "D", "E", "F"];
+
+				questions.forEach((q, index) => {
+					const userAnsIdx = state.userAnswers[index];
+					if (userAnsIdx !== q.correct) {
+						if (yPos > height - 20) {
+							doc.addPage();
+							yPos = 30;
+						}
+						doc.setFontSize(9);
+						doc.setTextColor(15, 23, 42);
+						doc.setFont("helvetica", "bold");
+						doc.text(`Q${index + 1} (${q.cat})`, margin, yPos);
+						
+						doc.setFont("helvetica", "normal");
+						doc.setTextColor(100, 116, 139);
+						// Taglia testo se troppo lungo
+						let shortText = q.text.length > 85 ? q.text.substring(0, 85) + "..." : q.text;
+						doc.text(shortText, margin + 20, yPos);
+
+						yPos += 4;
+						const userLetter = userAnsIdx !== undefined ? letters[userAnsIdx] : "-";
+						const correctLetter = letters[q.correct];
+
+						doc.setFontSize(8);
+						doc.setTextColor(220, 38, 38); 
+						doc.text(`You: ${userLetter}`, margin + 20, yPos);
+						doc.setTextColor(22, 163, 74); 
+						doc.text(`Correct: ${correctLetter}`, margin + 40, yPos);
+
+						yPos += 8; 
+						doc.setDrawColor(240, 240, 240);
+						doc.line(margin, yPos - 4, width - margin, yPos - 4);
+					}
+				});
+
+				if (state.score === questions.length) {
+					doc.setFontSize(10);
+					doc.setTextColor(22, 163, 74);
+					doc.text("Perfect Score! No errors detected.", margin, 40);
+				}
+
+				// Footer finale
+				doc.setFontSize(7);
+				doc.setTextColor(150, 150, 150);
+				doc.text("IQ Metrics Global - Confidential Report", width - margin, height - 10, null, null, "right");
+
+				doc.save("Cognitive_Report_Detailed.pdf");
+
+			} catch (err) {
+				alert("Errore PDF: " + err.message);
+				console.error(err);
+			}
+		}
 
         // --- PAYPAL ---
         paypal.Buttons({
