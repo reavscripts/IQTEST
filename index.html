@@ -696,10 +696,18 @@
 		/* Responsività per cellulari */
 		@media (max-width: 600px) {
 			.features-grid { grid-template-columns: 1fr; }
-			.card { padding: 25px; }
+			.card { padding: 20px; } /* Meno padding = più spazio */
+			
 			.share-buttons-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
+				grid-template-columns: 1fr 1fr; /* ✅ CORRETTO: 2 pulsanti per riga */
+				gap: 8px; /* Meno spazio tra i bottoni */
+			}
+			
+			/* Riduciamo un po' il font dei bottoni su mobile */
+			.share-btn {
+				font-size: 0.8rem; 
+				padding: 10px 5px;
+			}
 		}
     </style>
 </head>
@@ -820,14 +828,14 @@
 
     <div id="result-free" class="card hidden">
 		<div style="color: #10b981; font-weight:700; letter-spacing:1px; font-size:0.85rem; margin-bottom:10px; background:#d1fae5; display:inline-block; padding:4px 12px; border-radius:20px;">
-			✓ CALCULATION COMPLETE
+			<span data-i18n="calcComplete">✓ CALCULATION COMPLETE</span>
 		</div>
 		
-		<h2 style="margin-top:5px;">Your Report is Ready</h2>
-		<p style="font-size:0.95rem; color:#64748b;">The comprehensive analysis of your cognitive profile has been generated.</p>
+		<h2 style="margin-top:5px;" data-i18n="reportReady">Your Report is Ready</h2>
+		<p style="font-size:0.95rem; color:#64748b;" data-i18n="reportDesc">The comprehensive analysis of your cognitive profile has been generated.</p>
 
 		<div class="range-box-premium">
-			<p style="margin:0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight:700;">Your Estimated IQ Range</p>
+			<p style="margin:0; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight:700;" data-i18n="estRange">Your Estimated IQ Range</p>
 			<div id="calculated-range" style="font-size: 2.5rem; font-weight: 800; color: var(--primary); margin: 5px 0; letter-spacing: -1px;">Calculating...</div>
 			<div style="height:4px; width:100%; background:#e2e8f0; border-radius:2px; margin:10px 0; position:relative;">
 				<div style="position:absolute; left:20%; width:60%; height:100%; background:var(--accent); border-radius:2px; opacity:0.5;"></div>
@@ -985,7 +993,15 @@
 				premiumDesc: "Ottieni subito il tuo Report PDF Certificato.",
 				offerExp: "L'offerta scade tra",
 				challengeTitle: "Sfida i tuoi amici",
-				btnCopy: "Copia Link"
+				btnCopy: "Copia Link",
+				calcComplete: "✓ CALCOLO COMPLETATO",
+				reportReady: "Il tuo Report è Pronto",
+				reportDesc: "L'analisi completa del tuo profilo cognitivo è stata generata.",
+				estRange: "Il tuo Range di QI Stimato",
+				// Descrizioni dinamiche del punteggio
+				descLow: "Capacità logica nella media.",
+				descHigh: "Potenziale intelligenza analitica elevato.",
+				descSuperior: "Potenziale di elaborazione cognitiva eccezionale."	
 			},
 			// SPAGNOLO
 			es: {
@@ -1020,6 +1036,13 @@
 				premiumDesc: "Obtenga su Informe PDF Certificado al instante.",
 				offerExp: "La oferta expira en",
 				challengeTitle: "Desafía a tus amigos",
+				calcComplete: "✓ CÁLCULO COMPLETADO",
+				reportReady: "Tu Informe está Listo",
+				reportDesc: "Se ha generado el análisis completo de tu perfil cognitivo.",
+				estRange: "Tu Rango de CI Estimado",
+				descLow: "Capacidad lógica promedio.",
+				descHigh: "Alto potencial de inteligencia analítica.",
+				descSuperior: "Potencial de procesamiento cognitivo excepcional.",
 				btnCopy: "Copiar Enlace"
 			},
 			// FRANCESE
@@ -1730,11 +1753,20 @@
 			
 			document.getElementById('calculated-range').innerText = `${minRange} - ${maxRange}`;
 			
-			// Descrizione generica basata sul range alto
-			let desc = "Average logic capability.";
-			if(maxRange > 120) desc = "Potential for high analytical intelligence detected.";
-			if(maxRange > 135) desc = "Exceptional cognitive processing potential.";
-			document.getElementById('range-desc').innerText = desc;
+			// Rileva lingua corrente
+			const fullLang = navigator.language || navigator.userLanguage; 
+			const userLang = fullLang.split('-')[0];
+			const t = translations[userLang] || translations['it']; // Usa traduzioni o fallback
+
+			// Sceglie la descrizione tradotta corretta
+			let descKey = "descLow";
+			if(maxRange > 120) descKey = "descHigh";
+			if(maxRange > 135) descKey = "descSuperior";
+			
+			// Se la traduzione esiste usala, altrimenti usa l'inglese di default
+			let finalDesc = (t && t[descKey]) ? t[descKey] : "Average logic capability.";
+			
+			document.getElementById('range-desc').innerText = finalDesc;
 		}
 
         function unlockResult() {
