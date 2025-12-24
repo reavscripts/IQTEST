@@ -1757,5 +1757,23 @@
         }).render('#paypal-button-container');
 
     </script>
+	<div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; width: 100%; background: #0f172a; color: white; padding: 15px; z-index: 9999; display: flex; justify-content: center; align-items: center; gap: 20px; box-shadow: 0 -4px 10px rgba(0,0,0,0.1); font-size: 0.9rem;">
+		<span>
+			This site uses cookies to ensure the best experience and secure payments. 
+			<a href="privacy.html" style="color: #3b82f6; text-decoration: underline;">Read Policy</a>.
+		</span>
+		<button onclick="acceptCookies()" style="background: #3b82f6; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;">Accept</button>
+	</div>
+
+	<script>
+		function acceptCookies() {
+			document.getElementById('cookie-banner').style.display = 'none';
+			localStorage.setItem('cookieConsent', 'true');
+		}
+		// Se l'utente ha già accettato in passato, nascondi il banner
+		if (localStorage.getItem('cookieConsent') === 'true') {
+			document.getElementById('cookie-banner').style.display = 'none';
+		}
+	</script>
 </body>
 </html>
