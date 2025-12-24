@@ -578,10 +578,128 @@
 			height: 20px;
 		}
 		
+		.share-container {
+            margin: 30px 0;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .share-buttons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2 colonne su mobile */
+            gap: 10px;
+        }
+
+        .share-btn {
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: white;
+            transition: transform 0.2s, opacity 0.2s;
+            text-decoration: none;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        
+        .share-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+		
+		/* STILE BOX PREZZO */
+        .price-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid #3b82f6;
+            border-radius: 16px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discount-tag {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ef4444;
+            color: white;
+            padding: 5px 15px;
+            border-bottom-left-radius: 16px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .new-price {
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .offer-timer {
+            font-size: 0.9rem;
+            color: #ef4444;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .secure-badges {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            opacity: 0.7;
+            filter: grayscale(100%);
+        }
+        .secure-badges img { height: 20px; }
+
+        /* Colori Specifici */
+        .share-btn.whatsapp { background-color: #25D366; }
+        .share-btn.telegram { background-color: #0088cc; }
+        .share-btn.twitter  { background-color: #000000; } /* X Brand */
+        .share-btn.copy     { background-color: #64748b; } /* Grigio neutro */
+		
 		/* Responsività per cellulari */
 		@media (max-width: 600px) {
 			.features-grid { grid-template-columns: 1fr; }
 			.card { padding: 25px; }
+			.share-buttons-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
 		}
     </style>
 </head>
@@ -715,10 +833,31 @@
 				<div style="position:absolute; left:20%; width:60%; height:100%; background:var(--accent); border-radius:2px; opacity:0.5;"></div>
 			</div>
 			<p id="range-desc" style="font-size: 0.9rem; color:#475569; margin:0;">Analysis based on standard deviation σ=15.</p>
-			<button class="btn-whatsapp" onclick="shareWhatsApp()">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-				<span data-i18n="shareBtn">Challenge a Friend</span>
-			</button>
+			<div class="share-container">
+				<p style="margin-bottom: 15px; font-weight: 600; color: #64748b; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;" data-i18n="challengeTitle">Challenge your friends</p>
+				
+				<div class="share-buttons-grid">
+					<button class="share-btn whatsapp" onclick="shareSocial('whatsapp')">
+						<svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+						<span>WhatsApp</span>
+					</button>
+
+					<button class="share-btn telegram" onclick="shareSocial('telegram')">
+						<svg viewBox="0 0 496 512"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm121.8 169.9l-40.7 191.8c-3 13.6-11.1 16.9-22.4 10.5l-62-45.7-29.9 28.8c-3.3 3.3-6.1 6.1-12.5 6.1l4.4-63.1 114.9-103.8c5-4.4-1.1-6.9-7.7-2.5l-142 89.4-61.2-19.1c-13.3-4.2-13.6-13.3 2.8-19.7l239.1-92.2c11.1-4 20.8 2.7 17.2 19.5z"/></svg>
+						<span>Telegram</span>
+					</button>
+
+					<button class="share-btn twitter" onclick="shareSocial('twitter')">
+						<svg viewBox="0 0 512 512"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+						<span>X / Tweet</span>
+					</button>
+					
+					<button class="share-btn copy" id="btn-copy" onclick="shareSocial('copy')">
+						<svg viewBox="0 0 448 512"><path d="M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 35.3-28.7 64-64 64H48c-35.3 0-64-28.7-64-64V192c0-35.3 28.7-64 64-64zm336 64h32a32 32 0 0 1 32 32v32a32 32 0 0 1-32 32h-32v32a32 32 0 0 1-32 32h-32v32a32 32 0 0 1-32 32h-32v-32a32 32 0 0 1-32-32h-32a32 32 0 0 1-32-32v-32a32 32 0 0 1 32-32h32v-32a32 32 0 0 1 32-32h32v-32a32 32 0 0 1 32-32z"/></svg>
+						<span>Copy Link</span>
+					</button>
+				</div>
+			</div>
 		</div>
 
 		<div class="premium-blur-container">
@@ -759,7 +898,27 @@
 			</div>
 		</div>
 		
-		<div id="paypal-button-container" style="margin: 20px auto; max-width: 100%; width: 300px;"></div>
+		<div class="price-card">
+            <div class="discount-tag">-95% OFF</div>
+            
+            <h3 style="margin: 0; color: var(--primary);" data-i18n="premiumTitle">Unlock Full Analysis</h3>
+			<p style="margin: 5px 0 15px 0; font-size: 0.9rem; color: #64748b;" data-i18n="premiumDesc">Get your Certified PDF Report instantly.</p>
+            
+            <div class="price-row">
+                <span class="old-price">€19.90</span>
+                <span class="new-price">€1.00</span>
+            </div>
+            
+            <div class="offer-timer">
+				<span data-i18n="offerExp">Offer expires in</span> <span id="offer-countdown">09:45</span>
+			</div>
+
+            <div id="paypal-button-container"></div>
+            
+            <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 10px;">
+                🔒 SSL Encrypted Payment • No hidden fees
+            </div>
+        </div>
 		
 		<p style="font-size: 0.75rem; color: #94a3b8; margin-top:10px;">
 			<span style="display:inline-block; vertical-align:middle; width:6px; height:6px; background:#10b981; border-radius:50%; margin-right:4px;"></span>
@@ -821,7 +980,11 @@
 				faq3Q: "Quanto dura il test?",
 				faq3A: "Il test è rigorosamente cronometrato a 20 minuti. È progettato per essere impegnativo; non preoccuparti se non riesci a finire tutte le domande in tempo.",
 				faq4Q: "Il certificato è valido per il Mensa?",
-				faq4A: "Mentre questo test utilizza metodologie professionali correlate al WAIS-IV, l'ammissione ufficiale al Mensa richiede un esame presenziale supervisionato. Questo strumento è per valutazione personale."
+				faq4A: "Mentre questo test utilizza metodologie professionali correlate al WAIS-IV, l'ammissione ufficiale al Mensa richiede un esame presenziale supervisionato. Questo strumento è per valutazione personale.",
+				premiumTitle: "Sblocca Analisi Completa",
+				premiumDesc: "Ottieni subito il tuo Report PDF Certificato.",
+				offerExp: "L'offerta scade tra",
+				challengeTitle: "Sfida i tuoi amici",
 			},
 			// SPAGNOLO
 			es: {
@@ -1844,26 +2007,81 @@
             }
         }).render('#paypal-button-container');
 		
-		function shareWhatsApp() {
-			// 1. Prende il punteggio
-			const scoreRange = document.getElementById('calculated-range').innerText;
-			
-			// 2. Emoji sicure (Cervello 🧠 e Puzzle 🧩)
-			const brain = String.fromCodePoint(0x1F9E0); 
-			const puzzle = String.fromCodePoint(0x1F9E9); 
-			
-			// 3. Testo "Virale" su più righe
-			// Usa %0A per andare a capo. Questo rende il link ben visibile sotto.
-			const text = `${brain} Official IQ Analysis completed.\n\nMy estimated fluid intelligence range is: *${scoreRange}*.\n\nAre you in the top 2%? Test your logic here: ${puzzle}`;
-			const url = "https://test.reav.space";
-			
-			// 4. Costruisce il link completo
-			// Nota: Mettiamo l'URL alla fine staccato per generare l'anteprima sicura
-			const finalMsg = encodeURIComponent(text) + "%0A" + encodeURIComponent(url);
-			
-			// 5. Apre WhatsApp
-			window.open("https://wa.me/?text=" + finalMsg, '_blank');
-		}
+		function shareSocial(platform) {
+            // 1. Dati Punteggio
+            const scoreRange = document.getElementById('calculated-range').innerText;
+            const url = "https://test.reav.space";
+            
+            // 2. Emoji Sicure
+            const brain = String.fromCodePoint(0x1F9E0); 
+            const puzzle = String.fromCodePoint(0x1F9E9);
+            const check = String.fromCodePoint(0x2705);
+            
+            // 3. Testi differenziati per piattaforma
+            let text = "";
+            let shareUrl = "";
+
+            if (platform === 'whatsapp') {
+                text = `${brain} Official IQ Analysis completed.\n\nMy estimated fluid intelligence range is: *${scoreRange}*.\n\nAre you in the top 2%? Test your logic here: ${puzzle}`;
+                shareUrl = `https://wa.me/?text=${encodeURIComponent(text)}%0A${encodeURIComponent(url)}`;
+                window.open(shareUrl, '_blank');
+            } 
+            else if (platform === 'telegram') {
+                text = `${brain} I just took the Global Cognitive Assessment.\nMy result: **${scoreRange}**.\nCan you beat my score?`;
+                shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+                window.open(shareUrl, '_blank');
+            } 
+            else if (platform === 'twitter') {
+                text = `I just measured my fluid intelligence with IQ Metrics Global. 🧠\n\nMy result range: ${scoreRange}\n\n#IQTest #Intelligence #RavenMatrices`;
+                shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+                window.open(shareUrl, '_blank');
+            } 
+            else if (platform === 'copy') {
+                // Copia negli appunti
+                const copyText = `${brain} My IQ Range: ${scoreRange}. Try the test: ${url}`;
+                navigator.clipboard.writeText(copyText).then(() => {
+                    // Feedback visivo sul bottone
+                    const btn = document.getElementById('btn-copy');
+                    const originalHTML = btn.innerHTML;
+                    
+                    btn.style.backgroundColor = "#10b981"; // Verde successo
+                    btn.innerHTML = `<span>${check} Copied!</span>`;
+                    
+                    setTimeout(() => {
+                        btn.style.backgroundColor = "#64748b"; // Torna grigio
+                        btn.innerHTML = originalHTML;
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            }
+        }
+		// Funzione per il conto alla rovescia dell'offerta
+        function startOfferTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = duration; // Se finisce, ricomincia (loop infinito per non perdere la vendita)
+                }
+            }, 1000);
+        }
+
+        // Avvia il timer quando la pagina è pronta
+        window.onload = function () {
+            // ... il tuo codice esistente ...
+            
+            // Avvia un timer di 10 minuti (600 secondi)
+            const display = document.querySelector('#offer-countdown');
+            if(display) startOfferTimer(600, display);
+        };
     </script>
 
 	<div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; width: 100%; box-sizing: border-box; background: #0f172a; color: white; padding: 20px; z-index: 9999; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 15px; box-shadow: 0 -4px 10px rgba(0,0,0,0.2); font-size: 0.85rem; text-align: center;">
