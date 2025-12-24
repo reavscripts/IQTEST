@@ -248,23 +248,6 @@
 			margin: 0 auto;
 		}
 
-        /* RESULTS BLUR */
-        .result-blur-wrapper {
-            position: relative;
-            margin: 30px 0;
-            padding: 30px;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-        
-        .blurred-content {
-            filter: blur(12px);
-            opacity: 0.5;
-            user-select: none;
-            pointer-events: none;
-        }
-
 		/* Stile specifico per l'SVG dentro le risposte */
 		.option-svg {
 			width: 80px;  /* Dimensione fissa per le risposte */
@@ -283,22 +266,6 @@
 			padding-top: 4px;
 		}
 
-        .paywall-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255,255,255,0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .lock-icon { font-size: 3rem; margin-bottom: 15px; color: var(--primary); }
-
         /* BADGES */
         .iq-badge-large {
             font-size: 5rem;
@@ -316,17 +283,6 @@
             margin-bottom: 10px;
         }
 
-        /* ADMIN BTN */
-        .admin-btn {
-            background: transparent;
-            color: #ccc;
-            border: 1px solid #eee;
-            margin-top: 40px;
-            padding: 5px 10px;
-            font-size: 0.7rem;
-            cursor: pointer;
-        }
-        .admin-btn:hover { color: #333; border-color: #333; }
 		/* NUOVI STILI LANDING PAGE */
 		.hero-badge {
 			background: #eff6ff;
@@ -548,6 +504,38 @@
 			margin-top: 10px;
 		}
 
+		/* STILE FAQ */
+        .faq-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .faq-item summary {
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none; /* Rimuove la freccina standard brutta */
+            color: var(--primary);
+            position: relative;
+            padding-right: 20px;
+        }
+        .faq-item summary::-webkit-details-marker { display: none; } /* Per Safari/Chrome vecchi */
+        
+        .faq-item summary::after {
+            content: '+'; 
+            position: absolute; 
+            right: 0; 
+            color: var(--accent);
+            font-weight: bold;
+        }
+        .faq-item[open] summary::after { content: '-'; }
+        
+        .faq-item p {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+		
 		/* Responsività per cellulari */
 		@media (max-width: 600px) {
 			.features-grid { grid-template-columns: 1fr; }
@@ -629,6 +617,29 @@
 		<div style="margin-top: 20px; font-size: 0.75rem; color: #cbd5e1;">
 			ID: #REQ-2026-GCA • v4.2.0 • Secure Enclave
 		</div>
+		<div style="margin-top: 50px; text-align: left; border-top: 1px solid #e2e8f0; padding-top: 30px;">
+            <h3 style="text-align: center; margin-bottom: 25px;" data-i18n="faqTitle">Frequently Asked Questions</h3>
+            
+            <details class="faq-item">
+                <summary data-i18n="faq1Q">Is this IQ test accurate?</summary>
+                <p data-i18n="faq1A">Yes. This assessment is designed using the standards of Raven's Progressive Matrices, the most common methodology for measuring fluid intelligence and general cognitive ability (g-factor) globally.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary data-i18n="faq2Q">What is a "good" IQ score?</summary>
+                <p data-i18n="faq2A">The average score is defined as 100. Scores between 85 and 115 are considered average. A score above 130 is classified as "Gifted" (top 2% of the population).</p>
+            </details>
+
+            <details class="faq-item">
+                <summary data-i18n="faq3Q">How long does the test take?</summary>
+                <p data-i18n="faq3A">The test is strictly timed at 20 minutes. It is designed to be challenging; do not worry if you cannot finish all questions in time.</p>
+            </details>
+
+            <details class="faq-item">
+                <summary data-i18n="faq4Q">Is the certificate valid for Mensa?</summary>
+                <p data-i18n="faq4A">While this test uses professional methodologies correlated with WAIS-IV, official Mensa admission requires a proctored in-person exam. This tool is for personal assessment and educational purposes.</p>
+            </details>
+        </div>
 	</div>
 	
 
@@ -755,7 +766,16 @@
 				check1: "Assicurati di avere <strong>20 minuti</strong> di tempo ininterrotto.",
 				check2: "Non utilizzare calcolatrici o strumenti di ricerca esterni.",
 				check3: "Trova un ambiente silenzioso per massimizzare la concentrazione.",
-				startBtn: "Inizia il Test Certificato"
+				startBtn: "Inizia il Test Certificato",
+				faqTitle: "Domande Frequenti",
+				faq1Q: "Questo test è accurato?",
+				faq1A: "Sì. Questa valutazione è progettata utilizzando gli standard delle Matrici Progressive di Raven, la metodologia più comune al mondo per misurare l'intelligenza fluida e l'abilità cognitiva generale.",
+				faq2Q: "Qual è un 'buon' punteggio QI?",
+				faq2A: "Il punteggio medio è definito come 100. I punteggi tra 85 e 115 sono considerati nella media. Un punteggio superiore a 130 è classificato come 'Plusdotazione' (top 2% della popolazione).",
+				faq3Q: "Quanto dura il test?",
+				faq3A: "Il test è rigorosamente cronometrato a 20 minuti. È progettato per essere impegnativo; non preoccuparti se non riesci a finire tutte le domande in tempo.",
+				faq4Q: "Il certificato è valido per il Mensa?",
+				faq4A: "Mentre questo test utilizza metodologie professionali correlate al WAIS-IV, l'ammissione ufficiale al Mensa richiede un esame presenziale supervisionato. Questo strumento è per valutazione personale."
 			},
 			// SPAGNOLO
 			es: {
@@ -776,7 +796,16 @@
 				check1: "Asegúrate de tener <strong>20 minutos</strong> sin interrupciones.",
 				check2: "No utilices calculadoras ni herramientas de búsqueda externas.",
 				check3: "Busca un entorno tranquilo para maximizar la concentración.",
-				startBtn: "Comenzar Test Certificado"
+				startBtn: "Comenzar Test Certificado",
+				faqTitle: "Preguntas Frecuentes",
+				faq1Q: "¿Es preciso este test de CI?",
+				faq1A: "Sí. Esta evaluación está diseñada utilizando los estándares de las Matrices Progresivas de Raven, la metodología más común para medir la inteligencia fluida globalmente.",
+				faq2Q: "¿Qué es una 'buena' puntuación?",
+				faq2A: "La puntuación media se define como 100. Entre 85 y 115 se considera promedio. Una puntuación superior a 130 se clasifica como 'Superdotado' (top 2%).",
+				faq3Q: "¿Cuánto dura la prueba?",
+				faq3A: "La prueba está estrictamente cronometrada en 20 minutos. Está diseñada para ser desafiante; no te preocupes si no terminas todas las preguntas.",
+				faq4Q: "¿Es válido el certificado para Mensa?",
+				faq4A: "Aunque este test utiliza metodologías profesionales correlacionadas con WAIS-IV, la admisión oficial a Mensa requiere un examen presencial supervisado."
 			},
 			// FRANCESE
 			fr: {
@@ -797,7 +826,16 @@
 				check1: "Assurez-vous d'avoir <strong>20 minutes</strong> sans interruption.",
 				check2: "N'utilisez pas de calculatrices ou d'outils de recherche externes.",
 				check3: "Trouvez un environnement calme pour maximiser la concentration.",
-				startBtn: "Commencer le Test Certifié"
+				startBtn: "Commencer le Test Certifié",
+				faqTitle: "Foire Aux Questions",
+				faq1Q: "Ce test de QI est-il précis ?",
+				faq1A: "Oui. Cette évaluation utilise les normes des Matrices Progressives de Raven, la méthodologie la plus courante pour mesurer l'intelligence fluide au niveau mondial.",
+				faq2Q: "Qu'est-ce qu'un 'bon' score ?",
+				faq2A: "Le score moyen est de 100. Entre 85 et 115 est considéré comme la moyenne. Un score supérieur à 130 est classé comme 'Surdoué' (top 2%).",
+				faq3Q: "Combien de temps dure le test ?",
+				faq3A: "Le test est strictement chronométré à 20 minutes. Il est conçu pour être difficile ; ne vous inquiétez pas si vous ne finissez pas tout.",
+				faq4Q: "Le certificat est-il valable pour Mensa ?",
+				faq4A: "Bien que ce test utilise des méthodologies professionnelles corrélées au WAIS-IV, l'admission officielle à Mensa nécessite un examen en personne surveillé."
 			},
 			// PORTOGHESE
 			pt: {
@@ -818,7 +856,16 @@
 				check1: "Certifique-se de ter <strong>20 minutos</strong> de tempo ininterrupto.",
 				check2: "Não use calculadoras ou ferramentas de pesquisa externas.",
 				check3: "Encontre um ambiente silencioso para maximizar o foco.",
-				startBtn: "Iniciar Teste Certificado"
+				startBtn: "Iniciar Teste Certificado",
+				faqTitle: "Perguntas Frequentes",
+				faq1Q: "Este teste de QI é preciso?",
+				faq1A: "Sim. Esta avaliação é projetada usando os padrões das Matrizes Progressivas de Raven, a metodologia mais comum para medir a inteligência fluida globalmente.",
+				faq2Q: "O que é uma 'boa' pontuação?",
+				faq2A: "A média é definida como 100. Pontuações entre 85 e 115 são consideradas médias. Acima de 130 é classificado como 'Superdotado' (top 2%).",
+				faq3Q: "Quanto tempo dura o teste?",
+				faq3A: "O teste é estritamente cronometrado em 20 minutos. É projetado para ser desafiador; não se preocupe se não terminar todas as questões.",
+				faq4Q: "O certificado é válido para a Mensa?",
+				faq4A: "Embora este teste use metodologias profissionais correlacionadas com o WAIS-IV, a admissão oficial na Mensa requer um exame presencial supervisionado."
 			},
 			// RUSSO
 			ru: {
@@ -839,7 +886,16 @@
 				check1: "Убедитесь, что у вас есть <strong>20 минут</strong> непрерывного времени.",
 				check2: "Не используйте калькуляторы или внешние поисковые инструменты.",
 				check3: "Найдите тихое место, чтобы максимально сосредоточиться.",
-				startBtn: "Начать тест"
+				startBtn: "Начать тест",
+				faqTitle: "Часто задаваемые вопросы",
+				faq1Q: "Точен ли этот тест IQ?",
+				faq1A: "Да. Оценка разработана по стандартам Прогрессивных матриц Равена, самой распространенной методологии измерения подвижного интеллекта.",
+				faq2Q: "Какой балл считается хорошим?",
+				faq2A: "Средний балл — 100. От 85 до 115 — средний уровень. Выше 130 классифицируется как «Одаренность» (топ 2% населения).",
+				faq3Q: "Сколько длится тест?",
+				faq3A: "Тест строго ограничен 20 минутами. Он создан сложным; не волнуйтесь, если не успеете ответить на все вопросы.",
+				faq4Q: "Действителен ли сертификат для Mensa?",
+				faq4A: "Хотя тест использует профессиональные методологии (WAIS-IV), для официального вступления в Mensa требуется очный экзамен под наблюдением."
 			},
 			// CINESE (Mandarino Semplificato)
 			zh: {
@@ -860,7 +916,16 @@
 				check1: "确保您有 **20 分钟** 不受打扰的时间。",
 				check2: "请勿使用计算器或外部搜索工具。",
 				check3: "寻找一个安静的环境以最大限度地集中注意力。",
-				startBtn: "开始认证测试"
+				startBtn: "开始认证测试",
+				faqTitle: "常见问题",
+				faq1Q: "此智商测试准确吗？",
+				faq1A: "是的。该评估采用瑞文标准推理测验标准设计，这是全球测量流体智力和一般认知能力最通用的方法。",
+				faq2Q: "什么样的分数算“好”？",
+				faq2A: "平均分为 100 分。85 到 115 分之间为平均水平。130 分以上被归类为“天才”（前 2% 的人群）。",
+				faq3Q: "测试需要多长时间？",
+				faq3A: "测试严格限制在 20 分钟内。设计具有挑战性；如果不能按时完成所有问题也不必担心。",
+				faq4Q: "证书对门萨（Mensa）有效吗？",
+				faq4A: "虽然此测试使用了与 WAIS-IV 相关的专业方法，但正式加入门萨需要有人监考的现场考试。"
 			},
 			// HINDI
 			hi: {
@@ -881,7 +946,16 @@
 				check1: "सुनिश्चित करें कि आपके पास <strong>20 मिनट</strong> का निर्बाध समय है।",
 				check2: "कैलकुलेटर या बाहरी खोज टूल का उपयोग न करें।",
 				check3: "ध्यान केंद्रित करने के लिए एक शांत वातावरण खोजें।",
-				startBtn: "प्रमाणित टेस्ट शुरू करें"
+				startBtn: "प्रमाणित टेस्ट शुरू करें",
+				faqTitle: "সচরাচর জিজ্ঞাসিত প্রশ্ন",
+				faq1Q: "এই আইকিউ টেস্ট কি সঠিক?",
+				faq1A: "হ্যাঁ। এই মূল্যায়নটি র‍্যাভেনের প্রগ্রেসিভ ম্যাট্রিক্সের মানদণ্ড ব্যবহার করে ডিজাইন করা হয়েছে, যা বিশ্বব্যাপী তরল বুদ্ধিমত্তা পরিমাপের সবচেয়ে সাধারণ পদ্ধতি।",
+				faq2Q: "একটি 'ভাল' স্কোর কি?",
+				faq2A: "গড় স্কোর ১০০। ৮৫ থেকে ১১৫ এর মধ্যে স্কোর গড় হিসেবে গণ্য হয়। ১৩০ এর উপরে স্কোর 'মেধাবী' (শীর্ষ ২%) হিসেবে শ্রেণীবদ্ধ।",
+				faq3Q: "টেস্ট কতক্ষণ চলে?",
+				faq3A: "টেস্টটি কঠোরভাবে ২০ মিনিটের। এটি চ্যালেঞ্জিং হতে পারে; সব প্রশ্নের উত্তর দিতে না পারলে চিন্তা করবেন না।",
+				faq4Q: "সার্টিফিকেট কি মেনসার জন্য বৈধ?",
+				faq4A: "যদিও এই টেস্টটি পেশাদার পদ্ধতির ব্যবহার করে, মেনসায় ভর্তির জন্য একটি সরাসরি তত্ত্বাবধানে পরীক্ষার প্রয়োজন হয়।"
 			},
 			// BENGALESE
 			bn: {
@@ -902,7 +976,16 @@
 				check1: "নিশ্চিত করুন আপনার হাতে একটানা <strong>২০ মিনিট</strong> সময় আছে।",
 				check2: "ক্যালকুলেটর বা বাইরের সার্চ টুল ব্যবহার করবেন না।",
 				check3: "মনোযোগ বাড়াতে একটি শান্ত পরিবেশ খুঁজুন।",
-				startBtn: "সার্টিফাইড টেস্ট শুরু করুন"
+				startBtn: "সার্টিফাইড টেস্ট শুরু করুন",
+				faqTitle: "الأسئلة الشائعة",
+				faq1Q: "هل اختبار الذكاء هذا دقيق؟",
+				faq1A: "نعم. تم تصميم هذا التقييم باستخدام معايير مصفوفات رافن، وهي المنهجية الأكثر شيوعًا لقياس الذكاء السائل عالميًا.",
+				faq2Q: "ما هي درجة الذكاء 'الجيدة'؟",
+				faq2A: "متوسط الدرجة هو 100. تعتبر الدرجات بين 85 و 115 متوسطة. الدرجة فوق 130 تصنف على أنها 'موهوب' (أعلى 2%).",
+				faq3Q: "كم مدة الاختبار؟",
+				faq3A: "الاختبار محدد بمدة 20 دقيقة بصرامة. إنه مصمم ليكون صعبًا؛ لا تقلق إذا لم تتمكن من إنهاء جميع الأسئلة.",
+				faq4Q: "هل الشهادة صالحة لجمعية منسا؟",
+				faq4A: "بينما يستخدم هذا الاختبار منهجيات مهنية، يتطلب القبول الرسمي في منسا امتحانًا حضوريًا تحت الإشراف."
 			},
 			// ARABO (RTL - Right to Left)
 			ar: {
