@@ -1848,16 +1848,21 @@
 			// 1. Prende il punteggio
 			const scoreRange = document.getElementById('calculated-range').innerText;
 			
-			// 2. Crea il messaggio usando il CODICE UNICODE per il cervello (evita errori )
-			// \uD83E\uDDE0 è il codice universale per l'emoji del cervello 🧠
-			const text = "\uD83E\uDDE0 I just took this Global Cognitive Assessment. My estimated IQ range is " + scoreRange + ". Can you beat my score? Try here:";
+			// 2. Emoji sicure (Cervello 🧠 e Puzzle 🧩)
+			const brain = String.fromCodePoint(0x1F9E0); 
+			const puzzle = String.fromCodePoint(0x1F9E9); 
+			
+			// 3. Testo "Virale" su più righe
+			// Usa %0A per andare a capo. Questo rende il link ben visibile sotto.
+			const text = `${brain} Official IQ Analysis completed.\n\nMy estimated fluid intelligence range is: *${scoreRange}*.\n\nAre you in the top 2%? Test your logic here: ${puzzle}`;
 			const url = "https://test.reav.space";
 			
-			// 3. Costruisce il link
-			const whatsappUrl = "https://wa.me/?text=" + encodeURIComponent(text + " " + url);
+			// 4. Costruisce il link completo
+			// Nota: Mettiamo l'URL alla fine staccato per generare l'anteprima sicura
+			const finalMsg = encodeURIComponent(text) + "%0A" + encodeURIComponent(url);
 			
-			// 4. Apre WhatsApp
-			window.open(whatsappUrl, '_blank');
+			// 5. Apre WhatsApp
+			window.open("https://wa.me/?text=" + finalMsg, '_blank');
 		}
     </script>
 
