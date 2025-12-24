@@ -734,60 +734,247 @@
     </div>
 	
     <script>
-		// --- SISTEMA DI TRADUZIONE LANDING PAGE ---
+		// --- SISTEMA DI TRADUZIONE MULTILINGUA ---
+		const translations = {
+			// ITALIANO
+			it: {
+				global: "GLOBALE",
+				cert: "Valutazione Certificata",
+				badge: "Edizione Standardizzata 2026",
+				title: "Valutazione Cognitiva Globale",
+				desc: "Questo strumento professionale utilizza la metodologia delle <strong>Matrici Progressive di Raven</strong> per valutare l'Abilità Cognitiva Generale (<em>g-factor</em>) attraverso tre domini distinti.",
+				f1Title: "Intelligenza Fluida",
+				f1Desc: "Capacità di risolvere nuovi problemi e identificare schemi indipendentemente dalle conoscenze apprese.",
+				f2Title: "Ragionamento Spaziale",
+				f2Desc: "Capacità di visualizzare e manipolare mentalmente forme e sequenze complesse.",
+				f3Title: "Logica Numerica",
+				f3Desc: "Attitudine all'analisi di dati quantitativi e all'identificazione di relazioni matematiche.",
+				protoTitle: "Protocollo di Valutazione",
+				protoDesc: "Il test consiste in <strong>30 domande adattive</strong> con difficoltà crescente. Il punteggio finale è normalizzato su una popolazione campione globale (Media=100, SD=15).<br><br><strong>Validità:</strong> I risultati sono statisticamente correlati con gli standard professionali WAIS-IV.",
+				before: "Prima di iniziare",
+				check1: "Assicurati di avere <strong>20 minuti</strong> di tempo ininterrotto.",
+				check2: "Non utilizzare calcolatrici o strumenti di ricerca esterni.",
+				check3: "Trova un ambiente silenzioso per massimizzare la concentrazione.",
+				startBtn: "Inizia il Test Certificato"
+			},
+			// SPAGNOLO
+			es: {
+				global: "GLOBAL",
+				cert: "Evaluación Certificada",
+				badge: "Edición Estandarizada 2026",
+				title: "Evaluación Cognitiva Global",
+				desc: "Este instrumento profesional utiliza la metodología de las <strong>Matrices Progresivas de Raven</strong> para evaluar la Capacidad Cognitiva General (<em>factor g</em>) a través de tres dominios distintos.",
+				f1Title: "Inteligencia Fluida",
+				f1Desc: "Capacidad para resolver problemas nuevos e identificar patrones independientemente del conocimiento aprendido.",
+				f2Title: "Razonamiento Espacial",
+				f2Desc: "Capacidad para visualizar y manipular mentalmente formas y secuencias complejas.",
+				f3Title: "Lógica Numérica",
+				f3Desc: "Aptitud para analizar datos cuantitativos e identificar relaciones matemáticas.",
+				protoTitle: "Protocolo de Evaluación",
+				protoDesc: "La prueba consta de <strong>30 preguntas adaptativas</strong> de dificultad creciente. La puntuación final se normaliza con una población de muestra global (Media=100, DE=15).<br><br><strong>Validez:</strong> Los resultados están estadísticamente correlacionados con los estándares WAIS-IV.",
+				before: "Antes de comenzar",
+				check1: "Asegúrate de tener <strong>20 minutos</strong> sin interrupciones.",
+				check2: "No utilices calculadoras ni herramientas de búsqueda externas.",
+				check3: "Busca un entorno tranquilo para maximizar la concentración.",
+				startBtn: "Comenzar Test Certificado"
+			},
+			// FRANCESE
+			fr: {
+				global: "MONDIAL",
+				cert: "Évaluation Certifiée",
+				badge: "Édition Standardisée 2026",
+				title: "Évaluation Cognitive Globale",
+				desc: "Cet instrument professionnel utilise la méthodologie des <strong>Matrices Progressives de Raven</strong> pour évaluer l'Aptitude Cognitive Générale (<em>facteur g</em>) à travers trois domaines distincts.",
+				f1Title: "Intelligence Fluide",
+				f1Desc: "Capacité à résoudre de nouveaux problèmes et à identifier des schémas indépendamment des connaissances acquises.",
+				f2Title: "Raisonnement Spatial",
+				f2Desc: "Capacité à visualiser et manipuler mentalement des formes et des séquences complexes.",
+				f3Title: "Logique Numérique",
+				f3Desc: "Aptitude à analyser des données quantitatives et à identifier des relations mathématiques.",
+				protoTitle: "Protocole d'Évaluation",
+				protoDesc: "Le test consiste en <strong>30 questions adaptatives</strong> de difficulté croissante. Le score final est normalisé par rapport à un échantillon mondial (Moyenne=100, Écart-type=15).<br><br><strong>Validité :</strong> Les résultats sont statistiquement corrélés aux normes professionnelles WAIS-IV.",
+				before: "Avant de commencer",
+				check1: "Assurez-vous d'avoir <strong>20 minutes</strong> sans interruption.",
+				check2: "N'utilisez pas de calculatrices ou d'outils de recherche externes.",
+				check3: "Trouvez un environnement calme pour maximiser la concentration.",
+				startBtn: "Commencer le Test Certifié"
+			},
+			// PORTOGHESE
+			pt: {
+				global: "GLOBAL",
+				cert: "Avaliação Certificada",
+				badge: "Edição Padronizada 2026",
+				title: "Avaliação Cognitiva Global",
+				desc: "Este instrumento profissional utiliza a metodologia das <strong>Matrizes Progressivas de Raven</strong> para avaliar a Capacidade Cognitiva Geral (<em>fator g</em>) através de três domínios distintos.",
+				f1Title: "Inteligência Fluida",
+				f1Desc: "Capacidade de resolver novos problemas e identificar padrões independentemente do conhecimento aprendido.",
+				f2Title: "Raciocínio Espacial",
+				f2Desc: "Capacidade de visualizar e manipular mentalmente formas e sequências complexas.",
+				f3Title: "Lógica Numérica",
+				f3Desc: "Aptidão para analisar dados quantitativos e identificar relações matemáticas.",
+				protoTitle: "Protocolo de Avaliação",
+				protoDesc: "O teste consiste em <strong>30 perguntas adaptativas</strong> com dificuldade crescente. A pontuação final é normalizada numa população de amostra global (Média=100, DP=15).<br><br><strong>Validade:</strong> Os resultados são estatisticamente correlacionados com os padrões profissionais WAIS-IV.",
+				before: "Antes de começar",
+				check1: "Certifique-se de ter <strong>20 minutos</strong> de tempo ininterrupto.",
+				check2: "Não use calculadoras ou ferramentas de pesquisa externas.",
+				check3: "Encontre um ambiente silencioso para maximizar o foco.",
+				startBtn: "Iniciar Teste Certificado"
+			},
+			// RUSSO
+			ru: {
+				global: "ГЛОБАЛЬНЫЙ",
+				cert: "Сертифицированная оценка",
+				badge: "Стандартизированное издание 2026",
+				title: "Глобальная когнитивная оценка",
+				desc: "Этот профессиональный инструмент использует методологию <strong>Прогрессивных матриц Равена</strong> для оценки общих когнитивных способностей (<em>g-фактор</em>) в трех различных областях.",
+				f1Title: "Подвижный интеллект",
+				f1Desc: "Способность решать новые задачи и выявлять закономерности независимо от полученных знаний.",
+				f2Title: "Пространственное мышление",
+				f2Desc: "Способность мысленно визуализировать и манипулировать сложными формами и последовательностями.",
+				f3Title: "Числовая логика",
+				f3Desc: "Склонность к анализу количественных данных и выявлению математических связей.",
+				protoTitle: "Протокол оценки",
+				protoDesc: "Тест состоит из <strong>30 адаптивных вопросов</strong> возрастающей сложности. Итоговый балл нормализован по глобальной выборке (Среднее=100, SD=15).<br><br><strong>Валидность:</strong> Результаты этой оценки статистически коррелируют с профессиональными стандартами WAIS-IV.",
+				before: "Прежде чем начать",
+				check1: "Убедитесь, что у вас есть <strong>20 минут</strong> непрерывного времени.",
+				check2: "Не используйте калькуляторы или внешние поисковые инструменты.",
+				check3: "Найдите тихое место, чтобы максимально сосредоточиться.",
+				startBtn: "Начать тест"
+			},
+			// CINESE (Mandarino Semplificato)
+			zh: {
+				global: "全球",
+				cert: "认证评估",
+				badge: "2026 标准化版本",
+				title: "全球认知能力评估",
+				desc: "该专业工具采用**瑞文标准推理测验**（Raven's Progressive Matrices）方法，通过三个不同领域评估一般认知能力（*g因素*）。",
+				f1Title: "流体智力",
+				f1Desc: "独立于所学知识解决新问题和识别模式的能力。",
+				f2Title: "空间推理",
+				f2Desc: "在心理上想象和操纵复杂形状及序列的能力。",
+				f3Title: "数字逻辑",
+				f3Desc: "分析定量数据和识别数学关系的能力。",
+				protoTitle: "评估协议",
+				protoDesc: "测试包含 **30 道自适应问题**，难度递增。最终得分根据全球样本人群进行标准化（平均值=100，标准差=15）。<br><br>**有效性：** 该评估结果与专业的 WAIS-IV 标准具有统计相关性。",
+				before: "开始之前",
+				check1: "确保您有 **20 分钟** 不受打扰的时间。",
+				check2: "请勿使用计算器或外部搜索工具。",
+				check3: "寻找一个安静的环境以最大限度地集中注意力。",
+				startBtn: "开始认证测试"
+			},
+			// HINDI
+			hi: {
+				global: "वैश्विक",
+				cert: "प्रमाणित मूल्यांकन",
+				badge: "मानकीकृत 2026 संस्करण",
+				title: "वैश्विक संज्ञानात्मक मूल्यांकन",
+				desc: "यह पेशेवर उपकरण तीन अलग-अलग डोमेन में सामान्य संज्ञानात्मक क्षमता (<em>g-factor</em>) का मूल्यांकन करने के लिए <strong>रेवेन्स प्रोग्रेसिव मैट्रिसेस</strong> पद्धति का उपयोग करता है।",
+				f1Title: "तरल बुद्धिमत्ता",
+				f1Desc: "सीखे गए ज्ञान से स्वतंत्र होकर नई समस्याओं को हल करने और पैटर्न की पहचान करने की क्षमता।",
+				f2Title: "स्थानिक तर्क",
+				f2Desc: "जटिल आकृतियों और अनुक्रमों को मानसिक रूप से देखने और हेरफेर करने की क्षमता।",
+				f3Title: "संख्यात्मक तर्क",
+				f3Desc: "मात्रात्मक डेटा का विश्लेषण करने और गणितीय संबंधों की पहचान करने की योग्यता।",
+				protoTitle: "मूल्यांकन प्रोटोकॉल",
+				protoDesc: "टेस्ट में बढ़ती कठिनाई के साथ <strong>30 अनुकूली प्रश्न</strong> शामिल हैं। अंतिम स्कोर एक वैश्विक नमूना आबादी (माध्य=100, एसडी=15) के खिलाफ सामान्यीकृत है।<br><br><strong>वैधता:</strong> इस मूल्यांकन के परिणाम पेशेवर WAIS-IV मानकों के साथ सांख्यिकीय रूप से सहसंबद्ध हैं।",
+				before: "शुरू करने से पहले",
+				check1: "सुनिश्चित करें कि आपके पास <strong>20 मिनट</strong> का निर्बाध समय है।",
+				check2: "कैलकुलेटर या बाहरी खोज टूल का उपयोग न करें।",
+				check3: "ध्यान केंद्रित करने के लिए एक शांत वातावरण खोजें।",
+				startBtn: "प्रमाणित टेस्ट शुरू करें"
+			},
+			// BENGALESE
+			bn: {
+				global: "গ্লোবাল",
+				cert: "সার্টিফাইড অ্যাসেসমেন্ট",
+				badge: "স্ট্যান্ডার্ডাইজড ২০২৬ সংস্করণ",
+				title: "গ্লোবাল কগনিটিভ অ্যাসেসমেন্ট",
+				desc: "এই পেশাদার টুলটি তিনটি ভিন্ন ডোমেনে সাধারণ জ্ঞানীয় ক্ষমতা (<em>g-factor</em>) মূল্যায়ন করতে <strong>র‍্যাভেনের প্রগ্রেসিভ ম্যাট্রিক্স</strong> পদ্ধতি ব্যবহার করে।",
+				f1Title: "ফ্লুইড ইন্টেলিজেন্স",
+				f1Desc: "অর্জিত জ্ঞান থেকে স্বাধীনভাবে নতুন সমস্যার সমাধান এবং প্যাটার্ন শনাক্ত করার ক্ষমতা।",
+				f2Title: "স্থানিক যুক্তি",
+				f2Desc: "জটিল আকার এবং ক্রম মানসিকভাবে কল্পনা এবং পরিবর্তন করার ক্ষমতা।",
+				f3Title: "সংখ্যাগত যুক্তি",
+				f3Desc: "পরিমাণগত ডেটা বিশ্লেষণ এবং গাণিতিক সম্পর্ক শনাক্ত করার দক্ষতা।",
+				protoTitle: "মূল্যায়ন প্রোটোকল",
+				protoDesc: "পরীক্ষায় ক্রমবর্ধমান কঠিন <strong>৩০টি অভিযোজিত প্রশ্ন</strong> রয়েছে। চূড়ান্ত স্কোর একটি গ্লোবাল স্যাম্পল জনসংখ্যার (গড়=১০০, এসডি=১৫) বিপরীতে নরমালাইজ করা হয়।<br><br><strong>বৈধতা:</strong> এই মূল্যায়নের ফলাফল পেশাদার WAIS-IV মানের সাথে পরিসংখ্যানগতভাবে সম্পর্কযুক্ত।",
+				before: "শুরু করার আগে",
+				check1: "নিশ্চিত করুন আপনার হাতে একটানা <strong>২০ মিনিট</strong> সময় আছে।",
+				check2: "ক্যালকুলেটর বা বাইরের সার্চ টুল ব্যবহার করবেন না।",
+				check3: "মনোযোগ বাড়াতে একটি শান্ত পরিবেশ খুঁজুন।",
+				startBtn: "সার্টিফাইড টেস্ট শুরু করুন"
+			},
+			// ARABO (RTL - Right to Left)
+			ar: {
+				global: "عالمي",
+				cert: "تقييم معتمد",
+				badge: "نسخة 2026 الموحدة",
+				title: "التقييم المعرفي العالمي",
+				desc: "تستخدم هذه الأداة المهنية منهجية <strong>مصفوفات رافن المتتابعة</strong> لتقييم القدرة المعرفية العامة (<em>عاملي جي</em>) عبر ثلاثة مجالات متميزة.",
+				f1Title: "الذكاء السائل",
+				f1Desc: "القدرة على حل المشكلات الجديدة وتحديد الأنماط بشكل مستقل عن المعرفة المكتسبة.",
+				f2Title: "الاستدلال المكاني",
+				f2Desc: "القدرة على تصور الأشكال والتسلسلات المعقدة ومعالجتها ذهنيًا.",
+				f3Title: "المنطق العددي",
+				f3Desc: "الكفاءة في تحليل البيانات الكمية وتحديد العلاقات الرياضية.",
+				protoTitle: "بروتوكول التقييم",
+				protoDesc: "يتكون الاختبار من <strong>30 سؤالاً تكيفيًا</strong> تزداد صعوبتها تدريجيًا. يتم معايرة النتيجة النهائية مقابل عينة سكانية عالمية (المتوسط=100، الانحراف المعياري=15).<br><br><strong>الصلاحية:</strong> ترتبط نتائج هذا التقييم إحصائيًا بمعايير WAIS-IV المهنية.",
+				before: "قبل أن تبدأ",
+				check1: "تأكد من أن لديك <strong>20 دقيقة</strong> من الوقت دون انقطاع.",
+				check2: "لا تستخدم الآلات الحاسبة أو أدوات البحث الخارجية.",
+				check3: "ابحث عن بيئة هادئة لزيادة التركيز.",
+				startBtn: "بدء الاختبار المعتمد"
+			},
+			// URDU (RTL)
+			ur: {
+				global: "عالمی",
+				cert: "تصدیق شدہ تشخیص",
+				badge: "معیاری 2026 ایڈیشن",
+				title: "عالمی علمی تشخیص",
+				desc: "یہ پیشہ ورانہ آلہ تین الگ الگ ڈومینز میں عمومی علمی صلاحیت (<em>g-factor</em>) کا اندازہ لگانے کے لیے <strong>ریون کی پروگریسو میٹرिس</strong> کے طریقہ کار کا استعمال کرتا ہے۔",
+				f1Title: "سیال ذہانت",
+				f1Desc: "سیکھے گئے علم سے آزاد ہو کر نئے مسائل حل کرنے اور پیٹرن کی شناخت کرنے کی صلاحیت۔",
+				f2Title: "مکینیکل استدلال",
+				f2Desc: "پیچیدہ شکلوں اور ترتیبوں کو ذہنی طور پر تصور کرنے اور ان میں ردوبدل کرنے کی صلاحیت۔",
+				f3Title: "عددی منطق",
+				f3Desc: "مقداری ڈیٹا کا تجزیہ کرنے اور ریاضیاتی تعلقات کی نشاندہی کرنے کی اہلیت۔",
+				protoTitle: "تشخیصی پروٹوکول",
+				protoDesc: "ٹیسٹ میں بڑھتی ہوئی دشواری کے ساتھ <strong>30 انکولی سوالات</strong> شامل ہیں۔ حتمی اسکور کو عالمی نمونہ آبادی (اوسط=100، ایس ڈی=15) کے مقابلے میں معمول پر لایا جاتا ہے۔<br><br><strong>درستگی:</strong> اس تشخیص کے نتائج پیشہ ورانہ WAIS-IV معیارات کے ساتھ شماریاتی طور پر منسلک ہیں۔",
+				before: "شروع کرنے سے پہلے",
+				check1: "یقینی بنائیں کہ آپ کے پاس بلا تعطل <strong>20 منٹ</strong> کا وقت ہے۔",
+				check2: "کیلکولیٹر یا بیرونی تلاش کے ٹولز استعمال نہ کریں۔",
+				check3: "توجہ مرکوز کرنے کے لیے پرسکون ماحول تلاش کریں۔",
+				startBtn: "تصدیق شدہ ٹیسٹ شروع کریں"
+			}
+		};
 
-const translations = {
-    it: {
-        // Header
-        global: "GLOBALE",
-        cert: "Valutazione Certificata",
-        
-        // Hero Section
-        badge: "Edizione Standardizzata 2026",
-        title: "Valutazione Cognitiva Globale",
-        desc: "Questo strumento professionale utilizza la metodologia delle <strong>Matrici Progressive di Raven</strong> per valutare l'Abilità Cognitiva Generale (<em>g-factor</em>) attraverso tre domini distinti.",
-        
-        // Features
-        f1Title: "Intelligenza Fluida",
-        f1Desc: "Capacità di risolvere nuovi problemi e identificare schemi indipendentemente dalle conoscenze apprese.",
-        f2Title: "Ragionamento Spaziale",
-        f2Desc: "Capacità di visualizzare e manipolare mentalmente forme e sequenze complesse.",
-        f3Title: "Logica Numerica",
-        f3Desc: "Attitudine all'analisi di dati quantitativi e all'identificazione di relazioni matematiche.",
-        
-        // Scientific Box
-        protoTitle: "Protocollo di Valutazione",
-        protoDesc: "Il test consiste in <strong>30 domande adattive</strong> con difficoltà crescente. Il punteggio finale è normalizzato su una popolazione campione globale (Media=100, SD=15).<br><br><strong>Validità:</strong> I risultati sono statisticamente correlati con gli standard professionali WAIS-IV.",
-        
-        // Checklist & Button
-        before: "Prima di iniziare",
-        check1: "Assicurati di avere <strong>20 minuti</strong> di tempo ininterrotto.",
-        check2: "Non utilizzare calcolatrici o strumenti di ricerca esterni.",
-        check3: "Trova un ambiente silenzioso per massimizzare la concentrazione.",
-        startBtn: "Inizia il Test Certificato"
-    }
-    // L'inglese non serve qui perché è già scritto nell'HTML di base
-};
+		function initTranslation() {
+			// Rileva la lingua del browser (es. "it-IT" -> "it")
+			const fullLang = navigator.language || navigator.userLanguage; 
+			let userLang = fullLang.split('-')[0]; // Prende solo la prima parte (it, en, zh, ar...)
 
-function initTranslation() {
-    // Rileva se la lingua del browser inizia con 'it' (es. it-IT, it-CH)
-    const userLang = navigator.language.startsWith('it') ? 'it' : 'en';
+			// Se non abbiamo la traduzione, fallback su Inglese (default HTML)
+			if (!translations[userLang]) return;
 
-    // Se è inglese (o altra lingua), non facciamo nulla perché l'HTML è già in inglese
-    if (userLang !== 'it') return;
+			// Gestione RTL (Right-to-Left) per Arabo e Urdu
+			if (userLang === 'ar' || userLang === 'ur') {
+				document.body.style.direction = 'rtl';
+				document.body.style.textAlign = 'right';
+				// Aggiustamenti specifici per RTL
+				document.querySelectorAll('.checklist').forEach(el => el.style.paddingRight = '20px');
+				document.querySelectorAll('.feature-item').forEach(el => el.style.textAlign = 'right');
+			}
 
-    // Applica le traduzioni italiane
-    document.querySelectorAll('[data-i18n]').forEach(element => {
-        const key = element.getAttribute('data-i18n');
-        if (translations.it[key]) {
-            // Usa innerHTML per mantenere i grassetti (<strong>)
-            element.innerHTML = translations.it[key];
-        }
-    });
-}
+			// Applica le traduzioni
+			document.querySelectorAll('[data-i18n]').forEach(element => {
+				const key = element.getAttribute('data-i18n');
+				if (translations[userLang][key]) {
+					element.innerHTML = translations[userLang][key];
+				}
+			});
+		}
 
-// Avvia la traduzione appena la pagina è caricata
-document.addEventListener('DOMContentLoaded', initTranslation);
+		document.addEventListener('DOMContentLoaded', initTranslation);
         const questions = [
 			// --- PART 1: MATH & NUMERICAL (10 Questions - TEXT ONLY) ---
 			{ 
