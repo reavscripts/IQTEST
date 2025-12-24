@@ -570,7 +570,7 @@
 				</div>
 				
 				<div class="brand-text">
-					<span class="brand-name">IQ METRICS <span style="font-weight:400; color:#64748b;">GLOBAL</span></span>
+					<span class="brand-name">IQ METRICS <span style="font-weight:400; color:#64748b;" data-i18n="global">GLOBAL</span></span>
 					<span class="brand-subtitle">Certified Assessment</span>
 				</div>
 			</div>
@@ -580,34 +580,34 @@
 	</header>
 
     <div id="intro" class="card">
-		<div class="hero-badge">Standardized 2026 Edition</div>
+		<div class="hero-badge" data-i18n="badge">Standardized 2026 Edition</div>
 		
-		<h1>Global Cognitive Assessment</h1>
-		<p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #475569;">
+		<h1 data-i18n="title">Global Cognitive Assessment</h1>
+		<p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: #475569;" data-i18n="desc">
 			This professional instrument utilizes the <strong>Raven's Progressive Matrices</strong> methodology to evaluate General Cognitive Ability (<em>g-factor</em>) across three distinct domains.
 		</p>
 
 		<div class="features-grid">
 			<div class="feature-item">
 				<span class="feature-icon">🧠</span>
-				<span class="feature-title">Fluid Intelligence</span>
-				<div class="feature-desc">Ability to solve novel problems and identify patterns independent of learned knowledge.</div>
+				<span class="feature-title" data-i18n="f1Title">Fluid Intelligence</span>
+				<div class="feature-desc" data-i18n="f1Desc">Ability to solve novel problems and identify patterns independent of learned knowledge.</div>
 			</div>
 			<div class="feature-item">
 				<span class="feature-icon">📐</span>
-				<span class="feature-title">Spatial Reasoning</span>
-				<div class="feature-desc">Capacity to visualize and manipulate complex shapes and sequences mentally.</div>
+				<span class="feature-title" data-i18n="f2Title">Spatial Reasoning</span>
+				<div class="feature-desc" data-i18n="f2Desc">Capacity to visualize and manipulate complex shapes and sequences mentally.</div>
 			</div>
 			<div class="feature-item">
 				<span class="feature-icon">🔢</span>
-				<span class="feature-title">Numerical Logic</span>
-				<div class="feature-desc">Aptitude for analyzing quantitative data and identifying mathematical relationships.</div>
+				<span class="feature-title" data-i18n="f3Title">Numerical Logic</span>
+				<div class="feature-desc" data-i18n="f3Desc">Aptitude for analyzing quantitative data and identifying mathematical relationships.</div>
 			</div>
 		</div>
 
 		<div class="scientific-box">
-			<h4 style="margin-top:0; color:var(--primary);">Assessment Protocol</h4>
-			<p style="font-size: 0.9rem; margin-bottom: 0;">
+			<h4 style="margin-top:0; color:var(--primary); "data-i18n="protoTitle">Assessment Protocol</h4>
+			<p style="font-size: 0.9rem; margin-bottom: 0;" data-i18n="protoDesc">
 				The test consists of <strong>30 adaptive questions</strong> with increasing difficulty. 
 				The final score is normalized against a global sample population (Mean=100, SD=15).
 				<br><br>
@@ -616,15 +616,15 @@
 		</div>
 
 		<div style="text-align: center;">
-			<p style="font-weight: 600; font-size: 0.9rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px;">Before you begin</p>
+			<p style="font-weight: 600; font-size: 0.9rem; text-transform: uppercase; color: #94a3b8; letter-spacing: 1px;" data-i18n="before">Before you begin</p>
 			<ul class="checklist">
-				<li>Ensure you have <strong>20 minutes</strong> of uninterrupted time.</li>
-				<li>Do not use calculators or external search tools.</li>
-				<li>Find a quiet environment to maximize focus.</li>
+				<li data-i18n="check1">Ensure you have <strong>20 minutes</strong> of uninterrupted time.</li>
+				<li data-i18n="check2">Do not use calculators or external search tools.</li>
+				<li data-i18n="check3">Find a quiet environment to maximize focus.</li>
 			</ul>
 		</div>
 
-		<button class="btn" onclick="startTest()">Begin Certified Test</button>
+		<button class="btn" onclick="startTest()" data-i18n="startBtn">Begin Certified Test</button>
 		
 		<div style="margin-top: 20px; font-size: 0.75rem; color: #cbd5e1;">
 			ID: #REQ-2026-GCA • v4.2.0 • Secure Enclave
@@ -734,6 +734,60 @@
     </div>
 	
     <script>
+		// --- SISTEMA DI TRADUZIONE LANDING PAGE ---
+
+const translations = {
+    it: {
+        // Header
+        global: "GLOBALE",
+        cert: "Valutazione Certificata",
+        
+        // Hero Section
+        badge: "Edizione Standardizzata 2026",
+        title: "Valutazione Cognitiva Globale",
+        desc: "Questo strumento professionale utilizza la metodologia delle <strong>Matrici Progressive di Raven</strong> per valutare l'Abilità Cognitiva Generale (<em>g-factor</em>) attraverso tre domini distinti.",
+        
+        // Features
+        f1Title: "Intelligenza Fluida",
+        f1Desc: "Capacità di risolvere nuovi problemi e identificare schemi indipendentemente dalle conoscenze apprese.",
+        f2Title: "Ragionamento Spaziale",
+        f2Desc: "Capacità di visualizzare e manipolare mentalmente forme e sequenze complesse.",
+        f3Title: "Logica Numerica",
+        f3Desc: "Attitudine all'analisi di dati quantitativi e all'identificazione di relazioni matematiche.",
+        
+        // Scientific Box
+        protoTitle: "Protocollo di Valutazione",
+        protoDesc: "Il test consiste in <strong>30 domande adattive</strong> con difficoltà crescente. Il punteggio finale è normalizzato su una popolazione campione globale (Media=100, SD=15).<br><br><strong>Validità:</strong> I risultati sono statisticamente correlati con gli standard professionali WAIS-IV.",
+        
+        // Checklist & Button
+        before: "Prima di iniziare",
+        check1: "Assicurati di avere <strong>20 minuti</strong> di tempo ininterrotto.",
+        check2: "Non utilizzare calcolatrici o strumenti di ricerca esterni.",
+        check3: "Trova un ambiente silenzioso per massimizzare la concentrazione.",
+        startBtn: "Inizia il Test Certificato"
+    }
+    // L'inglese non serve qui perché è già scritto nell'HTML di base
+};
+
+function initTranslation() {
+    // Rileva se la lingua del browser inizia con 'it' (es. it-IT, it-CH)
+    const userLang = navigator.language.startsWith('it') ? 'it' : 'en';
+
+    // Se è inglese (o altra lingua), non facciamo nulla perché l'HTML è già in inglese
+    if (userLang !== 'it') return;
+
+    // Applica le traduzioni italiane
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations.it[key]) {
+            // Usa innerHTML per mantenere i grassetti (<strong>)
+            element.innerHTML = translations.it[key];
+        }
+    });
+}
+
+// Avvia la traduzione appena la pagina è caricata
+document.addEventListener('DOMContentLoaded', initTranslation);
         const questions = [
 			// --- PART 1: MATH & NUMERICAL (10 Questions - TEXT ONLY) ---
 			{ 
