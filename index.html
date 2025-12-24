@@ -708,6 +708,36 @@
 				font-size: 0.8rem; 
 				padding: 10px 5px;
 			}
+			#question-text svg {
+				max-height: 160px; /* Nessuna immagine potrà essere più alta di così */
+				width: auto;       /* Mantiene le proporzioni */
+				max-width: 100%;
+				margin-bottom: 15px;
+			}
+
+			/* 2. Forza le risposte su 2 colonne compatte */
+			.options-grid {
+				grid-template-columns: 1fr 1fr !important; /* Forza 2 colonne */
+				gap: 10px;
+			}
+
+			/* 3. Riduci le dimensioni delle schede risposta */
+			.option-card {
+				min-height: 90px; /* Meno altezza minima */
+				padding: 8px;
+			}
+
+			/* 4. Riduci leggermente gli SVG delle opzioni */
+			.option-svg-container svg {
+				width: 50px;
+				height: 50px;
+			}
+			
+			/* 5. Testo delle domande più compatto */
+			h2#question-text {
+				font-size: 1.3rem; /* Riduce un po' il titolo gigante */
+				margin-bottom: 15px;
+			}
 		}
     </style>
 </head>
@@ -1703,6 +1733,16 @@
         }
 
         function renderQuestion() {
+			// --- FIX MOBILE SCROLL: Torna su all'inizio della domanda ---
+			const quizCard = document.getElementById('quiz');
+			if (quizCard) {
+				// Scrolla in modo fluido fino all'inizio della scheda del quiz
+				// Il -80 serve a lasciare un po' di spazio per l'header fisso
+				const y = quizCard.getBoundingClientRect().top + window.scrollY - 80;
+				window.scrollTo({top: y, behavior: 'smooth'});
+			}
+			// ------------------------------------------------------------
+
 			const q = questions[state.currentQ];
 			document.getElementById('question-count').innerText = `Q ${state.currentQ + 1} / ${questions.length}`;
 			document.getElementById('question-category').innerText = q.cat.toUpperCase() + " REASONING";
