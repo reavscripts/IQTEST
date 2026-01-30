@@ -292,4 +292,11 @@
     <loc>https://test.reav.space/terms.html</loc>
     <lastmod>2026-01-30</lastmod>
   </url>
+
+  <url>
+    <loc>https://test.reav.space/iq-guides.html</loc>
+    <lastmod>2026-01-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
